@@ -1,0 +1,4 @@
+[26-Jun-2022 08:55:45 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.30. in /home/kodr3555/jurnalscraping/vendor/composer/platform_check.php on line 24
+[26-Jun-2022 09:54:39 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.4.30. in /home/kodr3555/jurnalscraping/vendor/composer/platform_check.php on line 24
+[26-Jun-2022 16:50:13 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/kodr3555/jurnalscraping/app/Http/Controllers/ScrapingC.php on line 345
+[26-Jun-2022 16:50:28 Asia/Jakarta] PHP Fatal error:  Cannot use [] for reading in /home/kodr3555/jurnalscraping/app/Http/Controllers/ScrapingC.php on line 345
