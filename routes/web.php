@@ -31,6 +31,7 @@ Route::get('/tentang', 'TentangController@index')->name('tentang');
 Route::get('/admin_saran',  'SaranController@adminSaran')->name('tampil1');
 Route::get('/admin_saran1','SaranController@balasSaran')->name('balasSaran');
 Route::get('/reload-captcha','SaranController@reloadCaptcha')->name('reloadCaptcha');
+Route::get('/hapusnotif','NotifikasiController@delete')->name('hapusnotif');
 // Route::get('/cekCaptcha','SaranController@CekCaptcha')->name('CekCaptcha');
 // Route::get('/admin_saran', function () {
 //     return view('admin.saran');
@@ -42,9 +43,12 @@ Route::get('/saran',  'SaranController@index')->name('tampil');
 // })->name('saraaan');
 Route::get('/saran1','SaranController@saran')->name('saran1');
 
-Route::get('/coba', function () {
-    return view('coba');
-});
+// Route::get('/log', function () {
+//     return view('admin.log');
+// });
+// Route::get('/reset', function () {
+//     return view('admin.leg');
+// });
 // Route::get('/login', function () {
 //     return view('admin.login');
 // });
@@ -71,6 +75,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/daftar_kategori', 'DataKategoriC@index')->name('daftar_kategori');
 
     Route::get('/daftar_jurnal', 'DataJurnalC@index')->name('daftar_jurnal');
+    Route::get('/daftar_jurnal/json', 'DataJurnalC@json')->name('daftar_jurnal.json');
 
     Route::get('/detail_jurnal/{kode}', 'DataJurnalC@indexDetail')->name('detail_jurnal');
 
@@ -91,7 +96,7 @@ Route::middleware(['role: 1'])->group(function (){
 
     Route::post('/daftar_pt/tambah', 'DataPtC@create')->name('pt_tambah');
     Route::post('/detail_pt/edit/{kode}', 'DataPtC@update')->name('update_pt');
-    Route::delete('/detail_pt/hapus/{kode}', 'DataPtC@delete')->name('delete_pt');
+    Route::any('/detail_pt/hapus/{kode}', 'DataPtC@delete')->name('delete_pt');
 
     Route::post('/daftar_kategori/tambah', 'DataKategoriC@create')->name('kategori_tambah');
     Route::post('/detail_kategori/edit/{kode}', 'DataKategoriC@update');
@@ -99,6 +104,7 @@ Route::middleware(['role: 1'])->group(function (){
 
     Route::post('/daftar_jurnal/tambah', 'DataJurnalC@create')->name('jurnal_tambah');
     Route::delete('/daftar_jurnal/hapus/{kode}', 'DataJurnalC@delete');
+
 
     Route::post('/detail_jurnal/edit/{kode}', 'DataJurnalC@update');
     Route::post('/detail_jurnal/tambah/kat/{kode}', 'DataJurnalC@createJK');

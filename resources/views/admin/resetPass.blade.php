@@ -21,7 +21,7 @@
 
 	<!-- BEGIN SETTINGS -->
 	<!-- Remove this after purchasing -->
-	<link class="js-stylesheet" href="{{ url('admin/css/light.css')}}" rel="stylesheet">
+	<link class="js-stylesheet" href="{{ url('backup/admin/css/light.css')}}" rel="stylesheet">
 	<script src="js/settings.js"></script>
 	<style>
 		body {
@@ -38,7 +38,7 @@
   gtag('config', 'UA-120946860-10', { 'anonymize_ip': true });
 </script></head>
 <!--
-  HOW TO USE: 
+  HOW TO USE:
   data-theme: default (default), dark, light, colored
   data-layout: fluid (default), boxed
   data-sidebar-position: left (default), right
@@ -105,7 +105,7 @@
 	<script src="js/app.js"></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function(event) { 
+  document.addEventListener("DOMContentLoaded", function(event) {
     setTimeout(function(){
       if(localStorage.getItem('popState') !== 'shown'){
         window.notyf.open({

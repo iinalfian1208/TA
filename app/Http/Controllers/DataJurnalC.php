@@ -7,9 +7,11 @@ use App\Models\DataJurnalM;
 use App\Models\DataKategoriM;
 use App\Models\DataPtM;
 use App\Models\DataPJM;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Yajra\DataTables\Facades\DataTables;
 
 class DataJurnalC extends Controller
 {
@@ -22,16 +24,135 @@ class DataJurnalC extends Controller
         $this->publikasi = new DataPJM();
     }
 
-    public function index()
+    public function json()
     {
-        // $data = $this->model->data()
-        //         ->join('t_pt', 't_pt.id_pt', '=', 't_jurnal.id_pt')
-        //         ->paginate(10);
+
         $data = $this->model->data()
                 ->join('t_pt', 't_pt.id_pt', '=', 't_jurnal.id_pt')
                 ->get();
 
-        return view('admin.daftarJurnal', ['data' => $data]);
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+
+            ->addColumn('action', function($row){
+
+                $buttons = '<a href="/detail_jurnal/'.$row->id_jurnal.'">
+                <button type="button" class="btn btn-sm btn-primary" style="border-radius: 5px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" viewBox="0 0 25 25"><path fill="currentColor" d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925L7 12.625V19.7h7.075L21 12.75v8.95q0 .825-.588 1.413T19 23.7H5Zm4-6v-4.25l7.175-7.175l4.275 4.2l-7.2 7.225H9Zm12.875-8.65L17.6 4.85l1.075-1.075q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-1.05 1.05Z"/></svg>
+                </button>
+            </a>';
+
+            if (Auth::user()->level == 1) {
+                $buttons .= '<button type="button" class="btn btn-sm btn-danger" style="border-radius: 5px" data-bs-toggle="modal" data-bs-target="#hapus'.$row->id_jurnal.'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7ZM17 6H7v13h10V6ZM9 17h2V8H9v9Zm4 0h2V8h-2v9ZM7 6v13V6Z"/></svg>
+                </button>
+
+                <div class="modal fade" id="hapus'.$row->id_jurnal.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data Jurnal</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body m-2">
+                                <div class="mb-3">
+                                    Yakin ingin menghapus perguruan tinggi<strong style="margin: top 10px;"> '.$row->nama_jurnal.' ?</strong>
+                                </div>
+                                <div class="">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"><p  width="40" height="40">Batal</p></button>
+                                <form action="/daftar_jurnal/hapus/'.$row->id_jurnal.'" method="post">
+                                    <input type="hidden" name="_token" id="csrf-token" value="'.Session::token().'" />
+                                    <button type="submit" class="btn btn-primary"><p  width="40" height="40">Hapus</p></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>';
+            }
+
+            return $buttons;
+        })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+    public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            // $data = User::select('*');
+            // $data = DB::table('t_jurnal')->get();
+
+            $data = $this->model->data()
+            ->join('t_pt', 't_pt.id_pt', '=', 't_jurnal.id_pt')
+            ->get();
+
+            // dd($data);
+            return Datatables::of($data)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+                        return
+                '<a href="/detail_jurnal/'.$row->id_jurnal.'">
+                    <button type="button" class="btn btn-sm btn-primary" style="border-radius: 5px">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" viewBox="0 0 25 25"><path fill="currentColor" d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925L7 12.625V19.7h7.075L21 12.75v8.95q0 .825-.588 1.413T19 23.7H5Zm4-6v-4.25l7.175-7.175l4.275 4.2l-7.2 7.225H9Zm12.875-8.65L17.6 4.85l1.075-1.075q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-1.05 1.05Z"/></svg>
+                    </button>
+                </a>
+                <button type="button" class="btn btn-sm btn-danger" style="border-radius: 5px" data-bs-toggle="modal" data-bs-target="#hapus'.$row->id_jurnal.'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7ZM17 6H7v13h10V6ZM9 17h2V8H9v9Zm4 0h2V8h-2v9ZM7 6v13V6Z"/></svg>
+                </button>
+
+                <div class="modal fade" id="hapus'.$row->id_jurnal.'" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Data Jurnal</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body m-2">
+                    <div class="mb-3">
+                    Yakin ingin menghapus perguruan tinggi<strong style="margin: top 10px;"> '.$row->nama_jurnal.' ?</strong>
+                    </div>
+                    <div class="">
+
+                    </div>
+                </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><p  width="40" height="40">Batal</p></button>
+                        <form action="/daftar_jurnal/hapus/'.$row->id_jurnal.'" method="post">
+                        <input type="hidden" name="_token" id="csrf-token" value="'.Session::token().'" />
+                            <button type="submit" class="btn btn-primary"><p  width="40" height="40">Hapus</p></button>
+                        </form>
+                    </div>
+                </div>
+                </form>
+        </div>';
+
+            })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        return view('admin.daftarJurnal');
+                // $data = $this->model->data()
+                //         ->join('t_pt', 't_pt.id_pt', '=', 't_jurnal.id_pt')
+                //         ->paginate(10);
+        // $data = $this->model->data()
+        //         ->join('t_pt', 't_pt.id_pt', '=', 't_jurnal.id_pt')
+        //         ->get();
+
+        // return view('admin.daftarJurnal', ['data' => $data]);
+    }
+    public function cek()
+    {
+        if (Auth::user()->level == 1) {
+            # code...
+        return redirect()->route('daftar_jurnal.json');
+        }else{
+            return redirect()->route('daftar_jurnal.json');
+        }
+        # code...
     }
 
     public function create(Request $request)
@@ -55,7 +176,7 @@ class DataJurnalC extends Controller
             'peringkat'  => $request->peringkat,
             'id_pt'      => $pt->id_pt,
             'tgl_buat'   => date('Y-m-d H:i:s'),
-        ]; 
+        ];
 
         $this->model->data()->insert($data);
         Session::flash('sukses', 'Berhasil menambahkan data');
@@ -87,7 +208,7 @@ class DataJurnalC extends Controller
     public function delete($kode)
     {
         $this->model->data()->where('id_jurnal', $kode)->delete();
-        Session::flash('sukses', 'Berhasil menghapus data');
+        Session::flash('toast_sukses', 'Berhasil menghapus data');
         return redirect('/daftar_jurnal');
     }
 
@@ -99,7 +220,7 @@ class DataJurnalC extends Controller
                     ->first();
         $j_kategori = $this->kategori->data()->where('id_jurnal', $kode)->get();
         $j_publikasi= $this->publikasi->data()->where('id_jurnal', $kode)->get();
-        
+
         // $j_publikasi       = $this->model->data()
         //                     ->leftJoin('t_publikasi_jurnal', 't_publikasi_jurnal.id_jurnal', '=', 't_jurnal.id_jurnal')
         //                     ->where('t_jurnal.id_jurnal', $kode)
@@ -116,8 +237,8 @@ class DataJurnalC extends Controller
             'nama_kategori' => $request->kategori
         ];
         $data = $this->kategori->data()->insert($data);
-        Session::flash('sukses', 'Berhasil menambahkan kategori');
-        return redirect('/detail_jurnal/'.$kode);
+        // Session::flash('toast_sukses', 'Berhasil menambahkan kategori');
+        return redirect('/detail_jurnal/'.$kode)->with('toast_success', 'Berhasil Menambahkan Kategori');
     }
 
     public function updateJK(Request $request, $kode)
@@ -130,8 +251,8 @@ class DataJurnalC extends Controller
 
         $data = $this->kategori->data()->where('id_kategori', $kode)->update($data);
 
-        Session::flash('sukses', 'Berhasil memperbarui kategori');
-        return redirect('/detail_jurnal/'.$j->id_jurnal);
+        // Session::flash('toast_sukses', 'Berhasil memperbarui kategori');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Memperbarui Kategori');
     }
 
     public function deleteJK($kode)
@@ -140,8 +261,8 @@ class DataJurnalC extends Controller
 
         $this->kategori->data()->where('id_kategori', $kode)->delete();
 
-        Session::flash('sukses', 'Berhasil menghapus kategori');
-        return redirect('/detail_jurnal/'.$j->id_jurnal);
+        // Session::flash('toast_sukses', 'Berhasil menghapus kategori');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Menghapus Kategori');
     }
 
     public function createJP(Request $request, $kode)
@@ -151,8 +272,8 @@ class DataJurnalC extends Controller
             'bulan'         => $request->bulan
         ];
         $data = $this->publikasi->data()->insert($data);
-        Session::flash('sukses', 'Berhasil menambahkan jadwal publikasi');
-        return redirect('/detail_jurnal/'.$kode);
+        // Session::flash('toast_sukses', 'Berhasil menambahkan jadwal publikasi');
+        return redirect('/detail_jurnal/'.$kode)->with('toast_success', 'Berhasil Menambahkan Jadwal Publikasi');
     }
 
     public function updateJP(Request $request, $kode)
@@ -165,8 +286,9 @@ class DataJurnalC extends Controller
 
         $data = $this->publikasi->data()->where('id_publikasi_jurnal', $kode)->update($data);
 
-        Session::flash('sukses', 'Berhasil memperbarui jadwal publikasi');
-        return redirect('/detail_jurnal/'.$j->id_jurnal);
+        // Session::flash('toast_sukses', 'Berhasil memperbarui jadwal publikasi');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Memperbarui Jadwal Publikasi');
+        // return redirect()->route('data_user')->with('toast_success', 'Berhasil Menambahkan Data User');
     }
 
     public function deleteJP($kode)
@@ -175,7 +297,7 @@ class DataJurnalC extends Controller
 
         $this->publikasi->data()->where('id_publikasi_jurnal', $kode)->delete();
 
-        Session::flash('sukses', 'Berhasil menghapus jadwal publikasi');
-        return redirect('/detail_jurnal/'.$j->id_jurnal);
+        // Session::flash('sukses', 'Berhasil menghapus jadwal publikasi');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Menghapus Jadwal Publikasi');
     }
 }

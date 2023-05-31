@@ -4,14 +4,17 @@
 <head>
     <!-- Required meta tags -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" /> --}}
-    {{-- <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
-    {{-- <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Jurnal Scraping</title>
     <!-- plugins:css -->
@@ -21,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('/vendors/typicons/typicons.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendors/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendors/css/vendor.bundle.base.css') }}">
+
     <!-- endinject -->
     <!-- Plugin css for this page -->
     {{-- <link rel="stylesheet" href="{{ asset('/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
@@ -29,7 +33,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('/css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{ asset('/images/sinta/sintalogo.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="100x100" />
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     {{-- @livewireStyles --}}
@@ -85,27 +89,33 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="icon-bell"></i>
-                            <span class="count"></span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
-                            aria-labelledby="countDropdown">
-                            <a class="dropdown-item py-3">
-                                <p class="mb-0 font-weight-medium float-left">You have 7 unread mails </p>
-                                <span class="badge badge-pill badge-primary float-right">View all</span>
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item preview-item">
+                        aria-expanded="false">
+                        <i class="icon-bell"></i>
+                        <span class="count"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                    aria-labelledby="countDropdown" style="overflow-y:scroll ; height :370px">
+                    <a class="dropdown-item py-3">
+                        <strong><p class="mb-0 font-weight-bold float-left text-bold">Notifikasi</p></strong>
+                        <a href="{{ route('hapusnotif') }}" ><span class="badge badge-pill badge-danger float-right">Hapus Notifikasi</span></a>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    {{-- @foreach ( $saran as $a) --}}
+                    @foreach ( $notif as $item )
+                    <a class="dropdown-item preview-item" href="{{ route('tampil1') }}"  >
                                 <div class="preview-thumbnail">
-                                    <img src="images/faces/face10.jpg" alt="image" class="">
+                                    <img src="{{ asset('images/sinta/pesa.jpg') }}" alt="image" class="">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
-                                    <p class="preview-subject ellipsis font-weight-medium text-dark">Saran 1 </p>
-
+                                    <p class="widget-media dz-scroll height380">{{ $item->keterangan }} </p>
+                                    <p class="widget-media dz-scroll height380 mt-1">Klik Untuk Membalasnya</p>
+                                    <p class="fw-light small-text mb-0"> {{ $item->created_at }}</p>
                                 </div>
-                            </a>
-                        </div>
+                    </a>
+                    @endforeach
+                    {{-- @endforeach --}}
+                    </div>
+
                     </li>
                     <li class="nav-item dropdown d-none d-lg-block user-dropdown">
                         <a class="nav-link" id="UserDropdown" href="" data-bs-toggle="dropdown"
@@ -208,31 +218,84 @@
                         </a>
                     </li>
                     @endif
+                    @if (auth()->user()->level == 1)
                     <li
-                        class="nav-item {{ request()->is('daftar_pt') ? 'active' : (request()->is('daftar_kategori') ? 'active' : (request()->is('daftar_jurnal') ? 'active' : '')) }}">
+                    class="nav-item {{ (request()-> is('daftar_pt')) ? 'active' : ((request()-> is('daftar_kategori')) ? 'active' : ((request()-> is('daftar_jurnal')) ? 'active' : '' ))}}">
+                    <a data-target="#data_scraping" class="nav-link" data-bs-toggle="collapse" href="#data_scraping"
+                        aria-expanded="false" aria-controls="data_scraping">
+                        <i class="menu-icon mdi mdi-floor-plan"></i>
+                        <span class="menu-title text-black" style="text-black">Data Scraping</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+
+                    <div class="collapse" id="data_scraping">
+
+                        <ul id="data_scraping"
+                            class="nav flex-column sub-menu {{ (request()-> is('daftar_pt' )) ? 'show' : ((request()-> is('daftar_kategori' )) ? 'show' : ((request()-> is('daftar_jurnal' )) ? 'show' : '' ))}}"
+                            data-parent="#data_scraping">
+                            <li class="nav-item"> <a
+                                    class="nav-link  {{ request()->is('daftar_pt') ? 'active' : '' }}"
+                                    href="{{ route('daftar_pt') }}" style="text-warning">Data Perguruan Tinggi</a></li>
+                            <li class="nav-item"> <a
+                                    class="nav-link {{ request()->is('daftar_kategori') ? 'active' : '' }}"
+                                    href="{{ route('daftar_kategori') }}">Data Kategori</a></li>
+                            <li class="nav-item"> <a
+                                    class="nav-link {{ request()->is('daftar_jurnal') ? 'active' : '' }}"
+                                    href="{{ route('daftar_jurnal') }}">Data Jurnal</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+                    @endif
+                    @if (auth()->user()->level == 2)
+                    <li class="nav-item {{ request()->is('daftar_pt*', 'daftar_kategoriadmin*', 'daftar_jurnaladmin*') ? 'active' : '' }}">
                         <a data-target="#data_scraping" class="nav-link" data-bs-toggle="collapse" href="#data_scraping"
                             aria-expanded="false" aria-controls="data_scraping">
                             <i class="menu-icon mdi mdi-floor-plan"></i>
                             <span class="menu-title text-black" style="text-black">Data Scraping</span>
                             <i class="menu-arrow"></i>
                         </a>
-                        <div class="collapse" id="data_scraping">
 
-                            <ul id="data_scraping"
-                                class="nav flex-column sub-menu {{ request()->is('daftar_pt') ? 'show' : (request()->is('daftar_kategori') ? 'show' : (request()->is('daftar_jurnal') ? 'show' : '')) }}"
-                                data-parent="#data_scraping">
-                                <li class="nav-item"> <a
-                                        class="nav-link  {{ request()->is('daftar_pt') ? 'active' : '' }}"
-                                        href="{{ route('daftar_pt') }}" style="text-warning">Data Perguruan Tinggi</a></li>
-                                <li class="nav-item"> <a
-                                        class="nav-link {{ request()->is('daftar_kategori') ? 'active' : '' }}"
-                                        href="{{ route('daftar_kategori') }}">Data Kategori</a></li>
-                                <li class="nav-item"> <a
-                                        class="nav-link {{ request()->is('daftar_jurnal') ? 'active' : '' }}"
-                                        href="{{ route('daftar_jurnal') }}">Data Jurnal</a></li>
+                        <div class="collapse" id="data_scraping">
+                            <ul id="data_scraping" class="nav flex-column sub-menu">
+                                <li class="nav-item {{ request()->is('daftar_pt*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('daftar_pt') }}" style="text-warning">Data Perguruan Tinggi</a>
+                                </li>
+                                <li class="nav-item {{ request()->is('daftar_kategoriadmin*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('daftar_kategori') }}">Data Kategori</a>
+                                </li>
+                                <li class="nav-item {{ request()->is('daftar_jurnaladmin*') ? 'active' : '' }}">
+                                    <a class="nav-link" href="{{ route('daftar_jurnal') }}">Data Jurnal</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
+                    <li class="nav-item {{ request()->is('chatadmin*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('chat-admin') }}">
+                            <i class="mdi mdi-message-badge menu-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M4 4h16v12H5.17L4 17.17V4m0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm2 10h12v2H6v-2zm0-3h12v2H6V9zm0-3h12v2H6V6z"/>
+                                </svg>
+                            </i>
+                            <span class="menu-title text-black bold" style="text-black">Chat</span>
+                        </a>
+                    </li>
+                @endif
+
+
+                {{-- @if (auth()->user()->level == 2)
+                    <li class="nav-item {{ request()->is('chat*') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('chat-admin') }}">
+                            <i class="mdi mdi-message-badge menu-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M4 4h16v12H5.17L4 17.17V4m0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm2 10h12v2H6v-2zm0-3h12v2H6V9zm0-3h12v2H6V6z"/>
+                                </svg>
+                            </i>
+                            <span class="menu-title text-black bold" style="text-black">Chat</span>
+                        </a>
+                    </li>
+                @endif --}}
+
                     <li class="nav-item {{ request()->is('riwayat_pencarian') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('riwayat_pencarian') }}">
                             {{-- <i class="mdi mdi-account-search menu-icon"  data-feather="clock"></i> --}}
@@ -247,12 +310,6 @@
                             <span class="menu-title text-black" style="text-black">Pengaturan</span>
                         </a>
                     </li>
-                    {{-- <li class="nav-item {{ request()->is('penjadwalan') ? 'active' : '' }}">
-                        <a class="nav-link" href="/penjadwalan">
-                            <i class="menu-icon  mdi mdi-alarm-multiple "></i>
-                            <span class="menu-title">Penjadwalan</span>
-                        </a>
-                    </li> --}}
                      @if (auth()->user()->level == 1)
                     <li class="nav-item {{ request()->is('saran') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('tampil1') }}">
@@ -269,22 +326,23 @@
                         </a>
                     </li>
                     @endif
-                     @if (auth()->user()->level == 2)
+                     {{-- @if (auth()->user()->level == 2)
                     <li class="nav-item {{ request()->is('chat') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('chat-admin') }}">
                             <i class="mdi mdi-message-badge  menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M4 4h16v12H5.17L4 17.17V4m0-2c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2H4zm2 10h12v2H6v-2zm0-3h12v2H6V9zm0-3h12v2H6V6z"/></svg></i>
                             <span class="menu-title text-black-bold" style="text-black">Chat</span>
                         </a>
                     </li>
-                    @endif
+                    @endif --}}
                     <li class="nav-item">
                         <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <i class=" mdi mmdi mdi-logout  menu-icon"></i>
-                            <span class="menu-title text-black font-weight-bold" style="text-black">Keluar</span>
+                            <span class="menu-title text-black" style="text-black">Keluar</span>
                         </a>
                     </li>
                 </ul>
             </nav>
+
             {{--
       NAVBAR END --}}
             <!-- partial -->
@@ -307,6 +365,44 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+    {{-- @foreach ($saran as $a)
+    <div class="modal fade" id="balas-{{ $d->idSaran }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Berikan Balasan</h5>
+            <form action="{{ route('balasSaran') }}" method="get">
+                {{ csrf_field() }}
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="id_saran" id="id_saran" value="{{ $d->idSaran }}">
+            <div class="mb-3">
+                <label class="form-label" for="inputUsername">Nama </label>
+                <input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" placeholder="" value="{{ $d->nama_penulis}}" readonly>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="inputUsername">Review</label>
+                <input type="text" class="form-control" id="nama_pt" name="review" placeholder="" value="{{ $d->review}}" readonly>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="inputUsername">Saran</label>
+                <input type="text" class="form-control" id="nama_pt" name="review" placeholder="" value="{{ $d->isi}}" readonly>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="inputUsername">Balasan</label><br>
+                <textarea name="balas" type='text' id="balas" cols="62" rows="5"></textarea>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">Kirim</button>
+            </div>
+        </div>
+    </form>
+        </div>
+    </div>
+    @endforeach --}}
     <!-- container-scroller -->
 
     <!-- plugins:js -->

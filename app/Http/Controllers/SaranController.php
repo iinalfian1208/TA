@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Models\DataSaran;
+use App\Models\DataAdminM;
 // use Illuminate\Support\Facades\Hash;
+use App\Models\NotifikasiM;
+use Illuminate\Http\Request;
 use App\Models\DataBalasSaran;
 use Illuminate\Support\Facades\Session;
 
@@ -47,6 +49,13 @@ class SaranController extends Controller
                 'is_admin'=>'salah',
                 'tanggal'=> Carbon::now(),
                 'review' => $request->review,
+            ]);
+
+            $penerima = DataAdminM::where('level','1')->first();
+            NotifikasiM::create([
+                'user_id' => $penerima->id,
+                'keterangan' => $request->nama_penulis. ' Memberikan Saran Untuk Anda' ,
+                'jadwal' => Carbon::now()
             ]);
 
             if ($saran) {

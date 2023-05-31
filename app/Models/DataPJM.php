@@ -14,5 +14,8 @@ class DataPJM extends Model
     {
         return DB::table('t_publikasi_jurnal');
     }
-    
+
+
+
+
 }

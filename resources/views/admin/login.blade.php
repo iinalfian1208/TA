@@ -1,6 +1,17 @@
 <link rel="stylesheet" href="{{ asset('home/css/login.css') }}">
+<link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="100x100" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<style>
+    .row2.card.border-0.px-4.py-5 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+</style>
 {{-- https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css
 https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css --}}
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -15,21 +26,22 @@ https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css --}}
 <div class="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <div class="card card border-0 ">
         <div class="row d-flex">
-            <div class="col-lg-6">
-                <div class="card1 pb-5">
-                    <div class="row">
-                        <img src="{{ asset('images/sinta/sintalogo.png') }}" class="logo" style="border-radius: 10%;">
-                    </div>
-                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line">
-                        <img src="{{ asset('home/images/login.png') }}" class="image">
+            <div class="col-lg-6 mt-5">
+                <div class="card1">
+
+                    <div class="row px-5 justify-content-center mt-5 border-line">
+                        <img src="{{ asset('images/sinta/21.png') }}" class="image">
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="card2 card border-0 px-4 py-5">
-                    <div class="row mb-4 px-3"></div>
-                    <div class="row px-3 mb-3">
-                        <h1 class="h3 mb-4 text-center"><strong>Login</strong></h1>
+                    <div class="ro mb-4 px-3"></div>
+                    <div class="row2 px-3 mb-2 text-center">
+                        <h4 class="text-center" style="text-align: center"><strong>Silahkan Login Terlebih Dahulu</strong></h4>
+                    </div>
+                    <div class="row2 px-3 mb-3 text-center">
+                        <h1 class="h3 mb-4 "><strong>Login</strong></h1>
                     </div>
                     <div class="m-sm-0">
                         @if ($message = Session::get('sukses'))

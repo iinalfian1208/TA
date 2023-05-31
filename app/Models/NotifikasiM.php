@@ -13,5 +13,16 @@ class NotifikasiM extends Model
         'id_notifikasi',
         'keterangan',
         'tanggal',
+        'user_id',
+        'updated_at',
+        'created_at',
+
     ];
+    protected $primaryKey = 'id_notifikasi';
+
+
+    public function user()
+    {
+        return $this->belongsTo(DataAdminM::class, 'user_id', 'id');
+    }
 }

@@ -3,7 +3,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <h1 class="h3 mb-2 text-black fw-bold">Pengaturan Profil & Password</h1>
-        @if(session()->has('sukses'))
+        {{-- @if(session()->has('sukses'))
 			<div class="alert alert-success alert-dismissible" role="alert">
 				<div class="alert-message">
 					{{ session()->get('sukses') }}
@@ -25,7 +25,7 @@
 					@endforeach
 				</div>
 			</div>
-		@endif
+		@endif --}}
       <div class="row">
             <div class="col-lg-6 grid-margin stretch-card">
             <div class="card"></div>
@@ -44,7 +44,7 @@
               </ul>
               <div class="tab-content" id="myTabContent">
 
-                <div class="tab-pane fade show active" id="profil-tab-pane" role="tabpanel" aria-labelledby="profil-tab" tabindex="0">
+                <div class="tab-pane fade show active " id="profil-tab-pane" role="tabpanel" aria-labelledby="profil-tab" tabindex="0">
                     @foreach ($data as $data)
                     <form action="{{ Route('edit_profil') }}" method="POST">
                         {{ csrf_field() }}
@@ -91,4 +91,5 @@
     </div>
 </div>
 <div>
+    @include('sweetalert::alert')
   @endsection

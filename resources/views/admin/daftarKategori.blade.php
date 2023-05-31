@@ -3,7 +3,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <h1 class="h3 mb-2 text-black fw-bold">Data Kategori</h1>
-        @if ($message = Session::get('sukses'))
+        {{-- @if ($message = Session::get('sukses'))
         <div class="alert alert-success alert-dismissible" role="alert">
             <div class="alert-message">
                 <strong>{{ $message }}</strong>
@@ -16,7 +16,7 @@
                     <strong>{{ $message }}</strong>
                 </div>
             </div>
-        @endif
+        @endif --}}
       <div class="row">
         <div class="col-lg-6 grid-margin stretch-card">
           <div class="card"></div>
@@ -92,13 +92,13 @@
                       <td class="table-action" style="width: 5px">
                         <a type="button" data-toggle="modal" data-target="">
                             <button type="button" class="btn btn-sm btn-primary" style="border-radius: 5px" data-bs-toggle="modal" data-bs-target="#edit{{ $no }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925L7 12.625V19.7h7.075L21 12.75v8.95q0 .825-.588 1.413T19 23.7H5Zm4-6v-4.25l7.175-7.175l4.275 4.2l-7.2 7.225H9Zm12.875-8.65L17.6 4.85l1.075-1.075q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-1.05 1.05Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 23 23"><path fill="currentColor" d="M5 23.7q-.825 0-1.413-.587T3 21.7v-14q0-.825.588-1.413T5 5.7h8.925L7 12.625V19.7h7.075L21 12.75v8.95q0 .825-.588 1.413T19 23.7H5Zm4-6v-4.25l7.175-7.175l4.275 4.2l-7.2 7.225H9Zm12.875-8.65L17.6 4.85l1.075-1.075q.6-.6 1.438-.6t1.412.6l1.4 1.425q.575.575.575 1.4T22.925 8l-1.05 1.05Z"/></svg>
 
                             </button>
                         </a>
                         <a type="button" data-toggle="modal" data-target="">
                             <button type="button" class="btn btn-sm btn-danger" style="border-radius: 5px" data-bs-toggle="modal" data-bs-target="#hapus{{ $no }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7ZM17 6H7v13h10V6ZM9 17h2V8H9v9Zm4 0h2V8h-2v9ZM7 6v13V6Z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 23 23"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7ZM17 6H7v13h10V6ZM9 17h2V8H9v9Zm4 0h2V8h-2v9ZM7 6v13V6Z"/></svg>
                             </button>
                         </a>
                     </td>
@@ -175,6 +175,7 @@
     <!-- partial -->
   </div>
   </div>
+  @include('sweetalert::alert')
 @endsection
 
 

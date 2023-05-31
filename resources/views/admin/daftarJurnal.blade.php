@@ -31,18 +31,18 @@
 				<!--@endif-->
               </h4>
 
-              <div class="table-responsive">
-                <table id="myTable" class="table table-striped">
+                <table id="tableDataJurnal" class="table table-striped table-borderless" style="border: 0px">
                 <thead>
                     <tr>
-                        <th >No</th>
+                        <th class="text-center">No</th>
                         <th class="text-center">Peringkat</th>
-                        <th style="width: 100%">Nama Jurnal</th>
-                        <th>Perguruan Tinggi</th>
-                        <th class="text-center" style="width:100px">Aksi</th>
+                        <th class="text-center" style="width: 100%">Nama Jurnal</th>
+                        <th class="text-center">Perguruan Tinggi</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
-                 <tbody>
+                </table>
+                 {{-- <tbody>
                     @php
                     $no = 1;
                     @endphp
@@ -68,10 +68,10 @@
                         </a>
                         @endif
                     </td>
-                    </tr>
+                    </tr> --}}
 
                     {{-- Modal Hapus --}}
-                    <div class="modal fade" id="hapus{{ $d->id_jurnal }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    {{-- <div class="modal fade" id="hapus{{ $d->id_jurnal }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
                             <div class="modal-header">
@@ -93,10 +93,7 @@
                         </div>
                       </div>
                     @endforeach
-                  </tbody>
-                </table>
-              </div>
-            </div>
+                  </tbody> --}}
           </div>
 
         </div>
@@ -106,14 +103,53 @@
     <!-- partial:../../partials/_footer.html -->
     <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
-          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
+          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2023. All rights reserved.</span>
         </div>
       </footer>
       <!-- Button trigger modal -->
     <!-- partial -->
   </div>
   </div>
+  <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $("#tableDataJurnal").DataTable({
+            processing: true,
+            serverSide: true,
+            ordering: true,
+            dom: 'lBfrtip',
+                buttons: [
+                    'copy', 'excel', 'pdf', 'csv', 'print'
+                ],
+            ajax: "{{ route('daftar_jurnal.json') }}",
+            buttons: false,
+            searching: true,
+            // width: 800,
+            scrollY: true,
+            scrollX: true,
+            responsive :true,
+            // retrieve: true,
+            columns: [
+                {
+                    "data": 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false,
+                },
+                {
+                    data: 'peringkat',
+                    name: 'peringkat',
+                    render: function(data, type, full, meta) {
+                        return 'Sinta ' + data; // Menambahkan "Sinta" pada data peringkat
+                    }
+                },
+                {data: 'nama_jurnal', name: 'nama_jurnal'},
+                {data: 'nama_pt', name: 'nama_pt'},
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+            ]
+        });
 
+    });
+  </script>
 
-
+  @include('sweetalert::alert')
 @endsection

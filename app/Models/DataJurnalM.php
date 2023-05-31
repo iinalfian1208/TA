@@ -13,4 +13,8 @@ class DataJurnalM extends Model
     {
         return DB::table('t_jurnal');
     }
+//     public function pt()
+//     {
+// return $this->belongsTo(DataPtM::class,'id_pt','id_pt');
+//     }
 }

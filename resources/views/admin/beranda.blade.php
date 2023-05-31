@@ -7,28 +7,38 @@
           <div class="home-tab">
             <h1 class="h3 mb-2 text-black fw-bold">Beranda</h1>
             <div class="tab-content tab-content-basic">
-              <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
-                <div class="row">
-                    <div class="col-sm-12">
-                      <div class="statistics-details d-flex align-items-center justify-content-between">
-                        <div>
-                          <p class="statistics-title">Total Jurnal</p>
-                          <h3 class="rate-percentage">{{ $total_j }}</h3>
-                          {{-- <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>-0.5%</span></p> --}}
-                        </div>
-                        <div>
-                          <p class="statistics-title">Jumlah Pencarian Bulan Ini</p>
-                          <h3 class="rate-percentage">7{{ $pencarian }}</h3>
-                          {{-- <p class="text-success d-flex"><i class="mdi mdi-menu-up"></i><span>+0.1%</span></p> --}}
-                        </div>
-                        <div>
-                          <p class="statistics-title">Jumlah Kategori</p>
-                          <h3 class="rate-percentage">{{ $kategori_null }}</h3>
-                          {{-- <p class="text-danger d-flex"><i class="mdi mdi-menu-down"></i><span>68.8</span></p> --}}
-                        </div>
-                      </div>
+            <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview">
+            <div class="row mb-3">
+                <div class="col-lg-4 d-flex flex-column mb-2">
+                  <div class="card bg-primary card-rounded">
+                    <div class="card-body pb-0">
+                      <h4 class="card-title mb-2 card-title-dash text-white ">Total Jurnal</h4>
+                      <h2 class="text-white mb-4">{{ $total_j }}</h2>
                     </div>
                   </div>
+
+                </div>
+                <div class="col-lg-4 d-flex flex-column mb-2">
+                  <div class="card bg-warning card-rounded">
+                    <div class="card-body pb-0">
+                      <h4 class="card-title mb-2 card-title-dash text-white ">Jumlah Penguna</h4>
+                      <h2 class="text-white mb-4">{{ $pencarian }}</h2>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col-lg-4 d-flex flex-column mb-2">
+                  <div class="card bg-success card-rounded">
+                    <div class="card-body pb-0">
+                      <h4 class="card-title mb-2 card-title-dash text-white ">Jumlah Kategori</h4>
+                      <h2 class="text-white mb-4">{{ $kategori_null }}</h2>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
                 {{-- <div class="row">
                     <div class="col-sm-12">
                       <div

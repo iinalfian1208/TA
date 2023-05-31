@@ -14,12 +14,12 @@
 
   <title>Jurnal Scraping</title>
 
-  <link rel="shortcut icon" href="{{ asset('/images/sinta/sintalogo.png') }}" />
+
 
 
   <!-- slider stylesheet -->
 
-  <link rel="shortcut icon" href="{{ asset('/images/sinta/sintalogo.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="500x500"/>
 
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 

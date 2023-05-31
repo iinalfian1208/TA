@@ -61,8 +61,6 @@
                                     <form action="{{ route('balasSaran') }}" method="get">
                                         {{ csrf_field() }}
                                     </div>
-                                    {{-- <form action="{{ route('balasSaran') }}" method="get">
-                                        {{ csrf_field() }} --}}
                                     <div class="modal-body">
                                         <input type="hidden" name="id_saran" id="id_saran" value="{{ $d->idSaran }}">
                                     <div class="mb-3">

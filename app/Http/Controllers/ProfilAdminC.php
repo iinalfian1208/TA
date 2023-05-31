@@ -42,7 +42,7 @@ class ProfilAdminC extends Controller
 
         try {
             $this->model->data()->where('email', auth()->user()->email)->update($data);
-            return redirect()->route('profil')->with('sukses', 'Berhasil memperbarui data.');
+            return redirect()->route('profil')->with('toast_success', 'Berhasil memperbarui data.');
         } catch (\Illuminate\Database\QueryException $ex) {
             $errorCode = $ex->errorInfo[1];
             if($errorCode == 1062){
@@ -72,10 +72,10 @@ class ProfilAdminC extends Controller
 
             // Mail::to(auth()->user()->email)->send(new UpdateSandiMail(Auth::user()->email));
             // Session::flash('sukses', 'Berhasil memperbarui password');
-            return redirect()->route('profil')->with('sukses', 'Berhasil merubah password.');
+            return redirect()->route('profil')->with('toast_sukses', 'Berhasil Merubah password.');
         }
         // Session::flash('error', 'password saat ini tidak sama.');
-        return redirect()->route('profil')->with('error', 'password saat ini tidak sama.');
+        return redirect()->route('profil')->with('toast_error', 'Password Saat Ini Tidak Sama.');
     }
 
     public function delete($email)
@@ -93,8 +93,8 @@ class ProfilAdminC extends Controller
         $data   = $this->model->data()->where('email', Auth::user()->email)->get();
 
         if (count($data) == 0) {
-            Session::flash('error', 'Email tidak ada dalam daftar');
-            return redirect()->back();
+            // Session::flash('error', 'Email tidak ada dalam daftar');
+            return redirect()->back()->with('error', 'Email Tidak Ada Dalam Daftar');
         } else {
             // $token = Str::random(64);
             $email    = $data[0]->email;
@@ -103,8 +103,8 @@ class ProfilAdminC extends Controller
             // return $email.$password;
             Mail::to($data[0]->email)->send(new LupaSandiMail($data[0]->nama_admin, $link));
 
-            Session::flash('sukses', 'Periksa email Anda untuk merubah password. Periksa pada SPAM jika tidak terdapat di kotak masuk');
-            return redirect()->route('profil');
+            // Session::flash('sukses', 'Periksa email Anda untuk merubah password. Periksa pada SPAM jika tidak terdapat di kotak masuk');
+            return redirect()->route('profil')->with('success', 'Periksa email Anda untuk merubah password. Periksa pada SPAM jika tidak terdapat di kotak masuk');
         }
     }
 }

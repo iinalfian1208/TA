@@ -44,14 +44,16 @@ class DataKategoriC extends Controller
 
         $data    = [
             'nama_kategori'      => $request->nama_kategori,
-        ]; 
+        ];
 
         $cek = $this->model->data()->where('nama_kategori', $request->nama_kategori)->count();
         if ($cek != 0) {
-            Session::flash('gagal', 'Data sudah ada');
+            return redirect()->route('daftar_kategori')->with('toast_error', 'Data Kategori Sudah Ada');
+            // Session::flash('gagal', 'Data sudah ada');
         } else {
             $this->model->data()->insert($data);
-            Session::flash('sukses', 'Berhasil menambahkan data');
+            // Session::flash('sukses', 'Berhasil menambahkan data');
+            return redirect()->route('daftar_kategori')->with('toast_success', 'Berhasil Menambahkan Data Kategori');
         }
         return redirect()->route('daftar_kategori');
     }
@@ -64,13 +66,13 @@ class DataKategoriC extends Controller
 
         $data    = [
             'nama_kategori' => $request->nama_kategori,
-        ]; 
+        ];
 
         $this->model->data()->where('nama_kategori', $kode)->update($data);
-        
-        $this->iKategori->data()->where('nama_asing', $kode)->orWhere('nama_indonesia', $kode)->update(['nama_indonesia' => $request->nama_kategori]);
 
-        Session::flash('sukses', 'Berhasil memperbarui data.');
+        $this->iKategori->data()->where('nama_asing', $kode)->orWhere('nama_indonesia', $kode)->update(['nama_indonesia' => $request->nama_kategori]);
+        return redirect()->route('daftar_kategori')->with('toast_success', 'Berhasil Memperbarui Data Kategori');
+        // Session::flash('sukses', 'Berhasil memperbarui data.');
 
         // if ($getT[0]->total == 1) {
         //     $cek = $this->model->data()->where('nama_kategori', $kode)->first();
@@ -80,18 +82,20 @@ class DataKategoriC extends Controller
         //     $total = $getT[0]->total;
         //     Session::flash('sukses', 'Berhasil memperbarui data untuk '.$total.' jurnal');
         // }
-        return redirect()->route('daftar_kategori');
+        // return redirect()->route('daftar_kategori');
     }
 
     public function delete($kode, $total)
     {
         if ($total == 0) {
             $this->model->data()->where('nama_kategori', $kode)->delete();
+            return redirect()->route('daftar_kategori')->with('toast_success', 'Berhasil Menghapus Data Kategori');
             Session::flash('sukses', 'Berhasil menghapus data');
         } else {
-            Session::flash('gagal', 'Tidak dapat menghapus data dengan total jurnal >= 1');
+            return redirect()->route('daftar_kategori')->with('toast_error', 'Tidak Dapat Menghapus Data Kategori Dengan Total Jurnal >= 1');
+            // Session::flash('gagal', 'Tidak dapat menghapus data dengan total jurnal >= 1');
         }
-        
+
         return redirect()->route('daftar_kategori');
     }
 }

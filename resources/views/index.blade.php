@@ -1,8 +1,8 @@
 @extends('template')
 <head>
     <title>Jurnal Scraping</title>
-
-  <link rel="shortcut icon" href="{{ asset('/images/sinta/sintalogo.png') }}" />
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> --}}
+  <link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="100x100"/>
 
 </head>
 {{-- @section('tentang') --}}
@@ -60,7 +60,7 @@
                 <div class="col-lg-12 mt-2 mb-3">
                     <form action="{{ route('search') }}" method="GET">
                        <div class="input-group" style="border-radius: 50px">
-                            <input class="form-control"style="border-radius: 50px; margin-right: 10px" type="search" placeholder="Lakukan pencarian jurnal, nama perguruan tinggi atau lainnya" aria-label="Pencarian" aria-describedby="button-search" name="kata_kunci" value="{{ Route::is('pencarian') ? NULL : old('kata_kunci') }}" />
+                            <input class="form-control"style="border-radius: 50px; margin-right: 10px" type="search" placeholder="Lakukan Pencarian Berdasarkan Nama Jurnal, Nama Perguruan Tinggi Atau Lainnya" aria-label="Pencarian" aria-describedby="button-search" name="kata_kunci" value="{{ Route::is('pencarian') ? NULL : old('kata_kunci') }}" />
                                 <button class="btn btn-primary" type="submit"style="border-radius: 40px">Cari</button>
                         </div>
                     </form>
@@ -75,12 +75,17 @@
                     <div class="sticky-top" style="top:90px;">
 
                         <!-- Categories widget-->
-                        <div class="card mb-4">
+                        <div class="card mb-4" style="background-color: #d3d7dc">
                             <form action="{{ route('search') }}" method="GET">
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-md-12">Filter
                                             <button type="submit" class="btn btn-sm btn-primary float-end" style="border-radius: 40px">Terapkan</button>
+                                            {{-- <form action="/proses-data" method="post" onsubmit="reloadPage()">
+                                                <!-- Isi formulir -->
+                                                <button type="" class="btn btn-sm btn-primary float-end" style="border-radius: 40px"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 12c0-1.7-1.3-3-3-3s-3 1.3-3 3s1.3 3 3 3s3-1.3 3-3zm2-8.7C13.1 1.1 8.3 1.8 5.1 4.7V3c0-.6-.4-1-1-1s-1 .4-1 1v4.5c0 .6.4 1 1 1h4.5c.6 0 1-.4 1-1s-.4-1-1-1H6.2C7.7 4.9 9.8 4 12 4c4.4 0 8 3.6 8 8c0 .6.4 1 1 1s1-.4 1-1c0-3.6-1.9-6.9-5-8.7zm2.9 12.2h-4.5c-.6 0-1 .4-1 1s.4 1 1 1h2.4C16.3 19.1 14.2 20 12 20c-4.4 0-8-3.6-8-8c0-.6-.4-1-1-1s-1 .4-1 1c0 5.5 4.5 10 10 10c2.6 0 5-1 6.9-2.8V21c0 .6.4 1 1 1s1-.4 1-1v-4.5c0-.6-.5-1-1-1z"/></svg></button>
+                                            </form> --}}
+
                                         </div>
                                     </div>
                                 </div>
@@ -88,16 +93,17 @@
                                     <div class="row">
                                         <div class="col-md-12 d-flex justify-content-center">
                                             <a data-bs-toggle="collapse" href="#filter" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                <span style="font-weight: 470"><i class="bi bi-arrow-down-up"></i></span>
+                                                <span style="font-weight: 470"><i class="bi bi-arrow-down-up"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="m11.95 7.95l-1.414 1.414L8 6.828V20H6V6.828L3.466 9.364L2.05 7.95L7 3l4.95 4.95Zm10 8.1L17 21l-4.95-4.95l1.414-1.414l2.537 2.536L16 4h2v13.172l2.536-2.536l1.414 1.414Z"/></svg></i></span>
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body collapse show" id="filter">
+
                                     <div class="row">
-                                        <div class="col-md-12 mb-2">
+                                        <div class="col-md-12"  style="background-color: #ccd0d5">
                                             {{-- <a data-bs-toggle="collapse" href="#akreditasi" role="button" aria-expanded="false" aria-controls="collapseExample"> --}}
-                                                <span style="font-weight: 470">Jurnal Terakreditasi</span>
+                                                <span style="font-weight: 470">Jurnal Terakreditasi</span><hr class="mb-0 mt-2 border border-1 border border-primary">
                                             {{-- </a> --}}
                                         </div>
                                     </div>
@@ -122,8 +128,8 @@
                                     </div>
                                     {{-- <hr class="mb-0 mt-2 border border-1 border border-dark"> --}}
                                     <div class="row">
-                                        <div class="col-md-12 mb-2 mt-2">
-                                            <span style="font-weight: 470">Jadwal Publikasi</span>
+                                        <div class="col-md-12 mb-2 mt-2" style="background-color: #ccd0d5">
+                                            <span style="font-weight: 470">Jadwal Publikasi</span><hr class="mb-0 mt-2 border border-1 border border-primary">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -179,8 +185,8 @@
                                         @endfor
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 mb-2 mt-2">
-                                            <span style="font-weight: 470">Kategori Jurnal</span>
+                                        <div class="col-md-12 mb-2 mt-2"  style="background-color: #ccd0d5">
+                                            <span style="font-weight: 470">Kategori Jurnal</span><hr class="mb-0 mt-2 border border-1 border border-primary">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -201,7 +207,7 @@
 
                     </div>
                 </div>
-                <div class="col-lg-8 mt-3">
+                <div class="col-lg-8 mt-3" style="background-color: ">
                     {{-- <div class=" position-fixed" style="top:100px"> --}}
                     <!-- Post content-->
                     <article>
@@ -230,9 +236,9 @@
                                             $j_jdw = DB::table('t_publikasi_jurnal')->where('id_jurnal', $d->id_jurnal)->get();
                                         @endphp
                                         <div class="col-md-6 mb-3">
-                                            <div class="card bg-light" style="border: none">
+                                            <div class="card bg-light" style="background-color: #cbe0f5">
                                                 <div class="card-body p-3 px-4">
-                                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4"><span>S{{ $d->peringkat }}</span></div>
+                                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 p-2"><span>Sinta {{ $d->peringkat }}</span></div>
                                                     <a href="{{ $d->url }}" style="text-decoration: none;" target="_blank"><h6 class="fw-bold">{{ $d->nama_jurnal }}</h6></a>
                                                     {{-- <div class="small text-muted">- Client Name, Location</div> --}}
                                                     <h6 class="mb-0">{{ $d->nama_pt }}</h6><hr class="mb-0 mt-2 border border-1 border border-primary">
@@ -240,7 +246,7 @@
                                                         <li class="mb-2">
                                                             <div class="d-flex">
                                                                 <div class="flex-shrink-0"><i class="bi bi-signpost"></i></div>
-                                                                <div class="ms-2">
+                                                                <div class="ms-2"><svg xmlns="http://www.w3.org/2000/svg"  width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M21 17v-6.9L12 15L1 9l11-6l11 6v8h-2Zm-9 4l-7-3.8v-5l7 3.8l7-3.8v5L12 21Z"/></svg>
                                                                     @if (count($j_kat) == 0 || $d->id_jurnal == null)
                                                                         <span>-</span>
                                                                     @else
@@ -260,7 +266,7 @@
                                                         </li>
                                                         <li>
                                                             <div class="d-flex">
-                                                                <div class="flex-shrink-0"><i class="bi bi-calendar-week-fill"></i></div>
+                                                                <div class="flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" class="mr-1" width="23" height="23" viewBox="0 0 1024 1024"><path fill="currentColor" d="m960 95.888l-256.224.001V32.113c0-17.68-14.32-32-32-32s-32 14.32-32 32v63.76h-256v-63.76c0-17.68-14.32-32-32-32s-32 14.32-32 32v63.76H64c-35.344 0-64 28.656-64 64v800c0 35.343 28.656 64 64 64h896c35.344 0 64-28.657 64-64v-800c0-35.329-28.656-63.985-64-63.985zm0 863.985H64v-800h255.776v32.24c0 17.679 14.32 32 32 32s32-14.321 32-32v-32.224h256v32.24c0 17.68 14.32 32 32 32s32-14.32 32-32v-32.24H960v799.984zM736 511.888h64c17.664 0 32-14.336 32-32v-64c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32v64c0 17.664 14.336 32 32 32zm0 255.984h64c17.664 0 32-14.32 32-32v-64c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32v64c0 17.696 14.336 32 32 32zm-192-128h-64c-17.664 0-32 14.336-32 32v64c0 17.68 14.336 32 32 32h64c17.664 0 32-14.32 32-32v-64c0-17.648-14.336-32-32-32zm0-255.984h-64c-17.664 0-32 14.336-32 32v64c0 17.664 14.336 32 32 32h64c17.664 0 32-14.336 32-32v-64c0-17.68-14.336-32-32-32zm-256 0h-64c-17.664 0-32 14.336-32 32v64c0 17.664 14.336 32 32 32h64c17.664 0 32-14.336 32-32v-64c0-17.68-14.336-32-32-32zm0 255.984h-64c-17.664 0-32 14.336-32 32v64c0 17.68 14.336 32 32 32h64c17.664 0 32-14.32 32-32v-64c0-17.648-14.336-32-32-32z"/></svg></div>
                                                                 <div class="ms-2">
                                                                     @if (count($j_jdw) == 0 || $d->id_jurnal == null)
                                                                         <span>-</span>
@@ -294,7 +300,7 @@
                                                                         @endswitch
                                                                             <span>{{ $bln }}
                                                                                 @if ($i+1 != count($j_jdw))
-                                                                                |
+                                                                                  |
                                                                                 @endif
                                                                             </span>
                                                                         @endfor
@@ -311,17 +317,17 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="row d-flex justify-content-between">
-                                            <div class="col-md-5">
+                                            {{-- <div class="col-md-5">
                                                 <span class="text-muted fst-italic">Total Data : {{ $data->total() }}</span></br>
                                                 <span class="text-muted fst-italic">{{ ceil($data->total()/10) }} Halaman</span>
-                                            </div>
-                                            <div id="pagi2" class="col-md-7 d-flex justify-content-end mt-1">
+                                            </div> --}}
+                                            {{-- <div id="pagi2" class="col-md-7 d-flex justify-content-end mt-1"> --}}
                                                 {{-- <nav aria-label="Page navigation example"> --}}
                                                 {{-- {{ $data->links('vendor.pagination.custom') }} --}}
-                                                {{ $data->onEachSide(1)->links() }}
+                                                {{-- {{ $data->onEachSide(1)->links() }} --}}
                                                 {{-- {!! $data->onEachSide(3)->links('vendor.pagination.custom') !!} --}}
                                                 {{-- </nav> --}}
-                                            </div>
+                                            {{-- </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -339,6 +345,13 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{ url('search/js/scripts.js')}}"></script>
+        {{-- <script src="{{ url('js/reload.js')}}"></script> --}}
+
+        <script>
+            function reloadPage() {
+                location.reload();
+            }
+        </script>
         <script>
             function myFunction(x) {
               if (x.matches) { // If media query matches

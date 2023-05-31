@@ -348,112 +348,14 @@
 
   <!-- team section -->
 
-  {{-- <section class="team_section layout_padding2-bottom">
-    <div class="container">
-      <div class="heading_container">
-        <h2>
-          Meet The Team
-        </h2>
-        <p>
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </p>
-      </div>
-    </div>
-    <div class="team_container">
-      <div class="box b-1">
-        <div class="img-box">
-          <img src="home/images/t-1.png" alt="">
-        </div>
-        <div class="detail-box">
-          <h5>
-            Yokit Den
-          </h5>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-          </p>
-          <div class="social_box">
-            <a href="">
-              <img src="home/images/fb.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/images/twitter.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/images/linkedin.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/images/insta.png" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="box b-2">
-        <div class="img-box">
-          <img src="home/images/t-2.png" alt="">
-        </div>
-        <div class="detail-box">
-          <h5>
-            Morde Den
-          </h5>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-          </p>
-          <div class="social_box">
-            <a href="">
-              <img src="home/images/fb.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/images/twitter.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/images/linkedin.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/images/insta.png" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="box b-3">
-        <div class="img-box">
-          <img src="home/images/t-3.png" alt="">
-        </div>
-        <div class="detail-box">
-          <h5>
-            Marry Doki
-          </h5>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore
-          </p>
-          <div class="social_box">
-            <a href="">
-              <img src="home/images/fb.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/image/twitter.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/image/linkedin.png" alt="">
-            </a>
-            <a href="">
-              <img src="home/image/insta.png" alt="">
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> --}}
-
+ 
   <!-- end team section -->
 
   <!-- client section -->
 
 
   <!-- end client section -->
-  <div class="spinner-border text-primary" role="status">
+  {{-- <div class="spinner-border text-primary" role="status">
     <span class="sr-only">Loading...</span>
   </div>
   <div class="spinner-border text-secondary" role="status">
@@ -461,7 +363,7 @@
   </div>
   <div class="spinner-border text-success" role="status">
     <span class="sr-only">Loading...</span>
-  </div>
+  </div> --}}
 
 
 </body>
