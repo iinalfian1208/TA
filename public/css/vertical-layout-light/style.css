@@ -1,7 +1,7 @@
 /*------------------------------------------------------------------
  [Master Stylesheet]
 
-  Project:	Star Admin2 
+  Project:	Star Admin2
   Version:	1.2.1
 -------------------------------------------------------------------*/
 /*-------------------------------------------------------------------
@@ -25546,7 +25546,7 @@ dl li {
   vertical-align: middle;
   line-height: 1;
   white-space: nowrap;
-  padding: 1.125rem 1.375rem;
+  /* padding: 1.125rem 1.375rem; */
 }
 
 .table td {
@@ -29293,6 +29293,7 @@ div.tagsinput span.tag a {
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
   -ms-transition: width 0.25s ease, background 0.25s ease;
+ background-color: #81B186;
   width: 220px;
   height: 97px;
   padding: 20px 35px;
@@ -29311,6 +29312,7 @@ div.tagsinput span.tag a {
 @media (max-width: 991px) {
   .navbar .navbar-brand-wrapper {
     padding: 20px 0;
+    background-color: transparent;
   }
 }
 
@@ -29324,6 +29326,9 @@ div.tagsinput span.tag a {
 
 .navbar .navbar-brand-wrapper .navbar-brand.brand-logo-mini {
   display: none;
+  /* background-color: black;
+   */
+
 }
 
 .navbar .navbar-brand-wrapper .navbar-brand:active, .navbar .navbar-brand-wrapper .navbar-brand:focus, .navbar .navbar-brand-wrapper .navbar-brand:hover {
@@ -29340,12 +29345,15 @@ div.tagsinput span.tag a {
 .navbar .navbar-brand-wrapper .brand-logo-mini {
   padding-left: 0;
   text-align: center;
+  /* background-color: black; */
+
 }
 
 .navbar .navbar-brand-wrapper .brand-logo-mini img {
   width: calc(70px - 30px);
   max-width: 100%;
   margin: auto;
+
 }
 
 .navbar .navbar-brand-wrapper .navbar-toggler {

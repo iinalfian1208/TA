@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NotifikasiM extends Model
+class NotifikasiPesanM extends Model
 {
     use HasFactory;
-    protected $table = 't_notif';
+    protected $table = 't_notif_pesan';
     protected $fillable =[
-        'id_notifikasi',
+        'id_notif_pesan',
         'keterangan',
         'tanggal',
         'user_id',
@@ -19,7 +19,7 @@ class NotifikasiM extends Model
         'nama',
 
     ];
-    protected $primaryKey = 'id_notifikasi';
+    protected $primaryKey = 'id_notif_pesan';
 
 
     public function user()

@@ -123,42 +123,42 @@
 							<div class="modal-dialog modal-fullscreen-sm-down" role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
-										<h5 class="modal-title"><strong>Tambah Data Jadwal Publikasi Jurnal</strong></h5>
+										<h5 class="modal-title mt-0"><strong>Tambah Data Jadwal Publikasi Jurnal</strong></h5>
 										<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 									</div>
-									<div class="modal-body modal-lg">
+									<div class="modal-body"  style="width: 100%">
 										<form id="formSintaPub">
-                                            <div class="form-group row col-12">
-                                                <div class="col-md-2"><label class="form-label" for="inputUsername">Pilih Peringkat SINTA</label></div>
-                                                <div class="col-2">
-													<input class="form-check-input" type="radio" name="sintaPub" id="sp1" value="1">
-													<label class="form-check-label" for="s1">1</label>
-                                                </div>
-                                                <div class="col-2">
+                                            <div class="form-group row col-12 mr-1" style="width: 100%">
+                                                    <div class="col-md-2 mr-4"><label class="form-label" for="inputUsername">Pilih Peringkat SINTA</label></div>
+                                                    <div class="col-1 mr-2">
+                                                        <input class="form-check-input" type="radio" name="sintaPub" id="sp1" value="1">
+                                                        <label class="form-check-label" for="s1">1</label>
+                                                    </div>
+                                                <div class="col-1 mr-2">
                                                     <input class="form-check-input" type="radio" name="sintaPub" id="sp2" value="2">
-													<label class="form-check-label" for="s2">2</label>
+													<label class="form-check-label"  style="margin-right: 2px" for="s2">2</label>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-1 mr-2">
                                                     <input class="form-check-input" type="radio" name="sintaPub" id="sp3" value="3">
 													<label class="form-check-label" for="s3">3</label>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-1 mr-2">
                                                     <input class="form-check-input" type="radio" name="sintaPub" id="sp4" value="4">
 													<label class="form-check-label" for="s4">4</label>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-1 mr-2">
                                                     <input class="form-check-input" type="radio" name="sintaPub" id="sp5" value="5">
 													<label class="form-check-label" for="s5">5</label>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-1 mr-2">
 													<input class="form-check-input" type="radio" name="sintaPub" id="sp6" value="6">
 													<label class="form-check-label" for="s6">6</label>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-1 mr-3">
                                                     <input class="form-check-input" type="radio" name="sintaPub" id="sp6" value="0">
 													<label class="form-check-label">Semua</label>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-1">
                                                     <button type="submit" id="pilih" name="pilih" class="btn btn-primary">Pilih</button>
                                                 </div>
                                               </div>

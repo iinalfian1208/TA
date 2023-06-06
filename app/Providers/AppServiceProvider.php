@@ -5,6 +5,7 @@ namespace App\Providers;
 // use Illuminate\View\View;
 use App\Models\DataSaran;
 use App\Models\NotifikasiM;
+use App\Models\NotifikasiPesanM;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -36,6 +37,15 @@ class AppServiceProvider extends ServiceProvider
             $view->with('notif', $notif);
             // $saran = DataSaran::;
         });
+        Paginator::useBootstrap();
+
+        View::composer('admin.template', function ($view) {
+            $notifpesan = NotifikasiPesanM::where('user_id',Auth::user()->id)->orderBy('created_at','DESC')->get();
+            $view->with('notifpesan', $notifpesan);
+            // $saran = DataSaran::;
+        });
     }
+   
+
 
 }

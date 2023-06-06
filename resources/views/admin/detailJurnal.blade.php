@@ -61,8 +61,8 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="inputUsername">Perguruan Tinggi</label>
-                                    <select class="form-control" id="pt" name="pt" required>
-                                        <option value="{{ $data->id_pt }}">{{ $data->nama_pt }}</option>
+                                    <select class="form-control text-black" class="text-black" id="pt" name="pt" required>
+                                        <option value="{{ $data->id_pt }}" class="text-black">{{ $data->nama_pt }}</option>
                                         {{-- <option disabled>Choose...</option> --}}
                                         {{-- @foreach ($kategori as $kategori)
                                         <option value="{{ $kategori->id_kategori }}">{{ $kategori->nama_kategori }}</option> --}}
@@ -71,7 +71,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="form-label" for="inputUsername">Peringkat</label>
-                                        <select class="form-control" id="peringkat" name="peringkat" required>
+                                        <select class="form-control text-black" id="peringkat" name="peringkat" required>
                                             <option value="{{ $data->peringkat }}">SINTA {{ $data->peringkat }}</option>
                                             <option disabled>Choose...</option>
                                             <option value="1">SINTA 1</option>
@@ -112,7 +112,7 @@
                             <input type="hidden" name="produk" value="">
                             <div class="col-md-12"  style="margin-right: 0px">
                                 <div class="input-group mb-3">
-                                    <select class="form-control" id="kategori" name="kategori">
+                                    <select class="form-control " id="kategori" name="kategori">
                                         <option selected disabled>Pilih Kategori</option>
                                         @foreach ($kategori as $k)
                                             <option value=""></option>
@@ -149,7 +149,7 @@
                                         <form action="/detail_jurnal/edit/kat/{{ $j_k->id_kategori }}" method="post">
                                              {{ csrf_field() }}
                                             <td>
-                                                <select class="form-control" id="kategori" name="kategori" >
+                                                <select class="form-control text-black" id="kategori" name="kategori" >
                                                   <option value="{{ $j_k->id_kategori }}" selected>{{ $j_k->nama_kategori }}</option>
                                                     <option disabled>Pilih Kategori</option>
                                                     @foreach ($kategori as $k)
@@ -292,7 +292,7 @@
                                                   <form action="/detail_jurnal/edit/jp/{{ $j_p->id_publikasi_jurnal }}" method="post">
                                                       {{ csrf_field() }}
                                                       <td>
-                                                          <select name="bulan" id="bulan" class="form-control form-control-sm-5">
+                                                          <select name="bulan" id="bulan" class="form-control form-control-sm-5 text-black">
                                                               <option value="{{ $j_p->bulan }}" selected>{{ $bln }}</option>
                                                               <option disabled>Pilih Bulan</option>
                                                               <option value="1">Januari</option>

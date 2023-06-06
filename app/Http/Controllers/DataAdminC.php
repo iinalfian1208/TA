@@ -44,9 +44,9 @@ class DataAdminC extends Controller
 
         try {
             $this->model->data()->insert($data);
-            return redirect()->route('data_user')->with('toast_success', 'Berhasil Menambahkan Data User');
+            return redirect()->route('data_user')->with('success', 'Berhasil Menambahkan Data User');
         } catch (\Throwable $th) {
-            return redirect()->route('data_user')->with('toast_error', 'Gagal Menambah Data User');
+            return redirect()->route('data_user')->with('error', 'Gagal Menambah Data User');
         }
 
     }
@@ -68,7 +68,7 @@ class DataAdminC extends Controller
 
         try {
             $this->model->data()->where('id', $kode)->update($data);
-            return redirect()->route('data_user')->with('toast_success', 'Berhasil memperbarui data.');
+            return redirect()->route('data_user')->with('success', 'Berhasil memperbarui data.');
         } catch (\Illuminate\Database\QueryException $ex) {
             $errorCode = $ex->errorInfo[1];
             if($errorCode == 1062){
@@ -84,9 +84,9 @@ class DataAdminC extends Controller
     {
         try {
             $query = $this->model->data()->where('id', $kode)->delete();
-            return redirect()->route('data_user')->with('toast_success', 'Berhasil Menghapus Data User');
+            return redirect()->route('data_user')->with('success', 'Berhasil Menghapus Data User');
         } catch (Exception $e) {
-            return redirect()->route('data_user')->with('toast_error', 'Gagal Menghapus Data User');
+            return redirect()->route('data_user')->with('error', 'Gagal Menghapus Data User');
         }
 
     }

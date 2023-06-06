@@ -59,9 +59,9 @@ class SaranController extends Controller
             ]);
 
             if ($saran) {
-                return redirect()->route('tampil')->with('toast_success', 'Terimakasih ' .$request->nama_penulis. ' Atas Saran Anda');
+                return redirect()->route('tampil')->with('success', 'Terimakasih ' .$request->nama_penulis. ' Atas Saran Anda');
             } else {
-                return redirect()->route('tampil')->with('toast_error', 'Maaf ' .$request->nama_penulis. ' Saran Anda Gagal Terkirim');
+                return redirect()->route('tampil')->with('error', 'Maaf ' .$request->nama_penulis. ' Saran Anda Gagal Terkirim');
 
         }
     }
@@ -79,9 +79,9 @@ class SaranController extends Controller
             'tanggal'=> Carbon::now(),
         ]);
         if ($balassaran) {
-            return redirect()->route('tampil1')->with('toast_success', 'Saran Berhasil Di Balas');
+            return redirect()->route('tampil1')->with('success', 'Saran Berhasil Di Balas');
         } else {
-            return redirect()->route('tampil1')->with('toast_error', 'Saran Gagal Dibalas');
+            return redirect()->route('tampil1')->with('error', 'Saran Gagal Dibalas');
         }
     }
     public function reloadCaptcha()

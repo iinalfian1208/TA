@@ -57,8 +57,8 @@
                       </div>
                     </div>
                   </div>
-              <div class="table-responsive">
-                <table class="table table-striped">
+              <div class="table-responsive ">
+                <table id="" class="table table-sm table table-striped">
                   <thead>
                     <tr>
                       <th >No</th>

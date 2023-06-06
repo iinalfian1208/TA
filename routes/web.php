@@ -32,6 +32,7 @@ Route::get('/admin_saran',  'SaranController@adminSaran')->name('tampil1');
 Route::get('/admin_saran1','SaranController@balasSaran')->name('balasSaran');
 Route::get('/reload-captcha','SaranController@reloadCaptcha')->name('reloadCaptcha');
 Route::get('/hapusnotif','NotifikasiController@delete')->name('hapusnotif');
+Route::get('/hapusnotifpesan','NotifikasiPesanController@deletepesan')->name('hapusnotifpesan');
 // Route::get('/cekCaptcha','SaranController@CekCaptcha')->name('CekCaptcha');
 // Route::get('/admin_saran', function () {
 //     return view('admin.saran');
@@ -43,24 +44,9 @@ Route::get('/saran',  'SaranController@index')->name('tampil');
 // })->name('saraaan');
 Route::get('/saran1','SaranController@saran')->name('saran1');
 
-// Route::get('/log', function () {
-//     return view('admin.log');
-// });
-// Route::get('/reset', function () {
-//     return view('admin.leg');
-// });
-// Route::get('/login', function () {
-//     return view('admin.login');
-// });
-
-
 Route::get('/pencarian', 'PencarianC@searchKey')->name('search');
 
 Auth::routes();
-
-// Route::get('/login', function () {
-//     return view('admin.login');
-// })->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::get('/beranda', 'HomeController@adminHome')->name('beranda');

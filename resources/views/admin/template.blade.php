@@ -44,12 +44,9 @@
 
 <body>
     <div class="container-scroller">
-
-
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start"
-                style="background-color: #81B186">
-                <div class="me-3">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <div class="me-3" style="background-color: #81B186">
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-bs-toggle="minimize">
                         <span class="icon-menu"></span>
@@ -57,24 +54,21 @@
                 </div>
                 <div>
                     <a class="navbar-brand brand-logo" href="">
-                        {{-- <img src="images/logo.svg" alt="logo" /> --}}
+                        <img src="{{ asset('/images/sinta/24.png') }}" alt="image-fluid" style="width: 600px; height:40px;"/>
                     </a>
-                    <a class="navbar-brand brand-logo-mini" href="" style="background-color: #81B186">
-                        <img src="{{ asset('images/sinta/sintalogo.png') }}" alt="logo" />
+                    <a class="navbar-brand brand-logo-mini" href="">
+                        <img src="{{ asset('/images/sinta/21.png') }}" alt="logo" />
                     </a>
                 </div>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-top">
                 <ul class="navbar-nav">
                     <li class="nav-item font-weight-semibold d-none d-lg-block ms-0" >
-                        <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold">Admin</span></h1>
-                        {{-- <h3 class="welcome-sub-text">Your performance summary this week </h3> --}}
+                        <h1 class="welcome-text">Selamat Datang <span class="text-black fw-bold">{{ auth()->user()->nama_admin }}</span></h1>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item dropdown d-none d-lg-block">
-
-                    </li>
+                    <li class="nav-item dropdown d-none d-lg-block"></li>
                     <li class="nav-item d-none d-lg-block">
                         <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
                             <span class="input-group-addon input-group-prepend border-right">
@@ -86,59 +80,112 @@
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
                         aria-labelledby="notificationDropdown">
                     </div>
-                    </li>
+                    @if (auth()->user()->level == 1)
                     <li class="nav-item dropdown">
-                        <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="icon-bell"></i>
-                        <span class="count"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
-                    aria-labelledby="countDropdown" style="overflow-y:scroll ; height :370px">
-                    <a class="dropdown-item py-3">
-                        <strong><p class="mb-0 font-weight-bold float-left text-bold">Notifikasi</p></strong>
-                        <a href="{{ route('hapusnotif') }}" ><span class="badge badge-pill badge-danger float-right">Hapus Notifikasi</span></a>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    {{-- @foreach ( $saran as $a) --}}
-                    @foreach ( $notif as $item )
-                    <a class="dropdown-item preview-item" href="{{ route('tampil1') }}"  >
+                        <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                            <i class="icon-mail icon-lg"></i>
+                          </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                          aria-labelledby="countDropdown" style="overflow-y:scroll ; height :370px">
+                            <a class="dropdown-item py-3" href="{{ route('hapusnotif') }}">
+                                <strong><p class="mb-0 font-weight-bold float-left text-bold">Notifikasi Pesan</p></strong>
+                                <button class="badge badge-pill badge-danger float-right text-white">Hapus Notifikasi</button>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            @foreach ( $notifpesan as $item2 )
+                            <a class="dropdown-item preview-item" href="{{ route('daftar-chat') }}"  >
                                 <div class="preview-thumbnail">
                                     <img src="{{ asset('images/sinta/pesa.jpg') }}" alt="image" class="">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
-                                    <p class="widget-media dz-scroll height380">{{ $item->keterangan }} </p>
-                                    <p class="widget-media dz-scroll height380 mt-1">Klik Untuk Membalasnya</p>
-                                    <p class="fw-light small-text mb-0"> {{ $item->created_at }}</p>
+                                    <p class="widget-media dz-scroll height380">{{ $item2->nama }} mengirim chat untuk anda </p>
+                                    <p class="widget-media dz-scroll height380 mt-1">Klik untuk membalasnya</p>
+                                    <p class="fw-light small-text mb-0"> {{ $item2->created_at }}</p>
                                 </div>
-                    </a>
-                    @endforeach
-                    {{-- @endforeach --}}
-                    </div>
-
-                    </li>
-                    <li class="nav-item dropdown d-none d-lg-block user-dropdown">
-                        <a class="nav-link" id="UserDropdown" href="" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img class="img-xs rounded-circle" src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image"> </a>
-                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                            <div class="dropdown-header text-center">
-                                <img class="mdi mdi-account-box " src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image">
-                                {{-- <p class="mb-1 mt-3 font-weight-semibold">{{ Auth::user()->nama_admin }}</p> --}}
-                                {{-- <p class="fw-light text-muted mb-0">{{ Auth::user()->email }}</p> --}}
-                            </div>
-
-                            <a class="dropdown-item {{ request()->is('profil') ? 'active' : '' }}"
-                                href="{{ route('profil') }}"><i
-                                    class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Profil
-                                <span class="badge badge-pill badge-danger"></span></a>
-                                    <a type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
-                                        class="dropdown-item-icon mdi mdi-logout text-primary"></i>Keluar</a>
-
-
+                            </a>
+                            @endforeach
                         </div>
                     </li>
-                </ul>
+                    @endif
+                    @if (auth()->user()->level == 2)
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                          <i class="icon-mail icon-lg"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                            aria-labelledby="countDropdown" style="overflow-y:scroll ; height :370px">
+                            <a class="dropdown-item py-3" href="{{ route('hapusnotifpesan') }}">
+                                <strong><p class="mb-0 font-weight-bold float-left text-bold">Notifikasi Pesan</p></strong>
+                                <button class="badge badge-pill badge-danger float-right text-white">Hapus Notifikasi</button>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            @foreach ( $notifpesan as $item )
+                            <a class="dropdown-item preview-item" href="{{ route('balas-chat',$item->user_id) }}"  >
+                                <div class="preview-thumbnail">
+                                    <img src="{{ asset('images/sinta/pesa.jpg') }}" alt="image" class="">
+                                </div>
+                                <div class="preview-item-content flex-grow py-2">
+                                    <p class="widget-media dz-scroll height380">{{ $item->nama }} mengirim chat untuk anda </p>
+                                    <p class="widget-media dz-scroll height380 mt-1">Klik untuk embalasnya</p>
+                                    <p class="fw-light small-text mb-0"> {{ $item->created_at }}</p>
+                                </div>
+                            </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    @endif
+                    @if (auth()->user()->level == 1)
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator" id="notificationDropdown" href="#" data-bs-toggle="dropdown">
+                            <i class="icon-bell"></i>
+                            <span class="count"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0"
+                            aria-labelledby="countDropdown" style="overflow-y:scroll ; height :370px">
+                                <a class="dropdown-item py-3" href="{{ route('hapusnotif') }}">
+                                    <strong><p class="mb-0 font-weight-bold float-left text-bold">Notifikasi Saran</p></strong>
+                                    <button class="badge badge-pill badge-danger float-right text-white">Hapus Notifikasi</button>
+                                </a>
+                                <div class="dropdown-divider"></div>
+
+                                {{-- @foreach ( $notif as $item ) --}}
+                                @foreach ($notif as $item)
+                                <a class="dropdown-item preview-item" href="{{ auth()->user()->level == 1 ? route('tampil1') : route('daftar-chat') }}">
+                                    <div class="preview-thumbnail">
+                                        @if (auth()->user()->level == 1)
+                                            <img src="{{ asset('images/sinta/pesa.jpg') }}" alt="image" class="">
+                                        @else
+                                            <img src="{{ asset('images/sinta/21.jpg') }}" alt="image" class="">
+                                        @endif
+                                    </div>
+                                    <div class="preview-item-content flex-grow py-2">
+                                        <p class="widget-media dz-scroll height380">{{ $item->nama }} {{ $item->keterangan }}</p>
+                                        <p class="widget-media dz-scroll height380 mt-1">Klik Untuk Membalasnya</p>
+                                        <p class="fw-light small-text mb-0">{{ $item->created_at }}</p>
+                                    </div>
+                                </a>
+                                 @endforeach
+                        </div>
+                    </li>
+                      @endif
+                    <li class="nav-item dropdown">
+                        <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img class="img-xs rounded-circle" src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image"> </a>
+
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                        <div class="dropdown-header text-center">
+                            <img class="mdi mdi-account-box " src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image">
+                        </div>
+                         <a class="dropdown-item {{ request()->is('profil') ? 'active' : '' }}"
+                            href="{{ route('profil') }}"><i
+                                class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> Profil
+                            <span class="badge badge-pill badge-danger"></span></a>
+                                <a type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i
+                                 class="dropdown-item-icon mdi mdi-logout text-primary"></i>Keluar</a> </div>
+                    </li>
+                 </ul>
 
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                     data-bs-toggle="offcanvas">

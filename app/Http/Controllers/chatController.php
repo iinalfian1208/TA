@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\DataChats;
 use App\Models\DataAdminM;
+use App\Models\NotifikasiM;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\NotifikasiPesanM;
 use Illuminate\Support\Facades\Auth;
 
 class chatController extends Controller
@@ -32,12 +34,24 @@ class chatController extends Controller
             'tanggal'=>Carbon::now(),
             'is_admin'=>'Benar',
             ]);
+            NotifikasiPesanM::create([
+                'user_id' => $request->id,
+                'keterangan' => $request->nama_penulis. ' Mengirim Chat Untuk Anda' ,
+                'jadwal' => Carbon::now(),
+                'nama' =>Auth::user()->nama_admin
+            ]);
 
     return redirect()->route('balas-chat',$request->id);
 
     }else{
 
         $pengirim = DataAdminM::where('level',1)->first();
+        NotifikasiPesanM::create([
+            'user_id' => $pengirim->id,
+            'keterangan' => $request->nama_penulis. ' Mengirim Chat Untuk Anda' ,
+            'jadwal' => Carbon::now(),
+            'nama' =>Auth::user()->nama_admin
+        ]);
 
         DataChats::create([
         'sender_id'=>Auth::user()->id,

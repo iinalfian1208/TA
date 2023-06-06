@@ -208,7 +208,7 @@ class DataJurnalC extends Controller
     public function delete($kode)
     {
         $this->model->data()->where('id_jurnal', $kode)->delete();
-        Session::flash('toast_sukses', 'Berhasil menghapus data');
+        Session::flash('sukses', 'Berhasil menghapus data');
         return redirect('/daftar_jurnal');
     }
 
@@ -237,8 +237,8 @@ class DataJurnalC extends Controller
             'nama_kategori' => $request->kategori
         ];
         $data = $this->kategori->data()->insert($data);
-        // Session::flash('toast_sukses', 'Berhasil menambahkan kategori');
-        return redirect('/detail_jurnal/'.$kode)->with('toast_success', 'Berhasil Menambahkan Kategori');
+        // Session::flash('sukses', 'Berhasil menambahkan kategori');
+        return redirect('/detail_jurnal/'.$kode)->with('success', 'Berhasil Menambahkan Kategori');
     }
 
     public function updateJK(Request $request, $kode)
@@ -251,8 +251,8 @@ class DataJurnalC extends Controller
 
         $data = $this->kategori->data()->where('id_kategori', $kode)->update($data);
 
-        // Session::flash('toast_sukses', 'Berhasil memperbarui kategori');
-        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Memperbarui Kategori');
+        // Session::flash('sukses', 'Berhasil memperbarui kategori');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('success', 'Berhasil Memperbarui Kategori');
     }
 
     public function deleteJK($kode)
@@ -261,8 +261,8 @@ class DataJurnalC extends Controller
 
         $this->kategori->data()->where('id_kategori', $kode)->delete();
 
-        // Session::flash('toast_sukses', 'Berhasil menghapus kategori');
-        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Menghapus Kategori');
+        // Session::flash('sukses', 'Berhasil menghapus kategori');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('success', 'Berhasil Menghapus Kategori');
     }
 
     public function createJP(Request $request, $kode)
@@ -272,8 +272,8 @@ class DataJurnalC extends Controller
             'bulan'         => $request->bulan
         ];
         $data = $this->publikasi->data()->insert($data);
-        // Session::flash('toast_sukses', 'Berhasil menambahkan jadwal publikasi');
-        return redirect('/detail_jurnal/'.$kode)->with('toast_success', 'Berhasil Menambahkan Jadwal Publikasi');
+        // Session::flash('sukses', 'Berhasil menambahkan jadwal publikasi');
+        return redirect('/detail_jurnal/'.$kode)->with('success', 'Berhasil Menambahkan Jadwal Publikasi');
     }
 
     public function updateJP(Request $request, $kode)
@@ -286,9 +286,9 @@ class DataJurnalC extends Controller
 
         $data = $this->publikasi->data()->where('id_publikasi_jurnal', $kode)->update($data);
 
-        // Session::flash('toast_sukses', 'Berhasil memperbarui jadwal publikasi');
-        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Memperbarui Jadwal Publikasi');
-        // return redirect()->route('data_user')->with('toast_success', 'Berhasil Menambahkan Data User');
+        // Session::flash('sukses', 'Berhasil memperbarui jadwal publikasi');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('success', 'Berhasil Memperbarui Jadwal Publikasi');
+        // return redirect()->route('data_user')->with('success', 'Berhasil Menambahkan Data User');
     }
 
     public function deleteJP($kode)
@@ -298,6 +298,6 @@ class DataJurnalC extends Controller
         $this->publikasi->data()->where('id_publikasi_jurnal', $kode)->delete();
 
         // Session::flash('sukses', 'Berhasil menghapus jadwal publikasi');
-        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('toast_success', 'Berhasil Menghapus Jadwal Publikasi');
+        return redirect('/detail_jurnal/'.$j->id_jurnal)->with('success', 'Berhasil Menghapus Jadwal Publikasi');
     }
 }

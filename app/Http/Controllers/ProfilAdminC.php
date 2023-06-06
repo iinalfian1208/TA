@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\DataAdminM;
-use Illuminate\Support\Facades\Mail;
-// use App\Mail\LupaSandiMail;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
-use Illuminate\Support\Facades\Hash;
+// use App\Mail\LupaSandiMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfilAdminC extends Controller
 {
@@ -42,7 +43,7 @@ class ProfilAdminC extends Controller
 
         try {
             $this->model->data()->where('email', auth()->user()->email)->update($data);
-            return redirect()->route('profil')->with('toast_success', 'Berhasil memperbarui data.');
+            return redirect()->route('profil')->with('success', 'Berhasil memperbarui data.');
         } catch (\Illuminate\Database\QueryException $ex) {
             $errorCode = $ex->errorInfo[1];
             if($errorCode == 1062){
@@ -55,28 +56,60 @@ class ProfilAdminC extends Controller
     }
 
     public function updatePass(Request $request)
-    {
+{
+    try {
         $input = $request->validate([
             'password'            => 'required',
-            'password_baru'       => ['required', Rules\Password::defaults()],
+            'password_baru'       => ['required', 'string', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/'],
             'konfirmasi_password' => ['same:password_baru'],
+        ], [
+            'password_baru.min'    => 'Password harus memiliki minimal :min karakter.',
+            'password_baru.regex'  => 'Password harus terdiri dari huruf, angka, dan setidaknya satu simbol.',
         ]);
 
-        if (Hash::check($request->password,  auth()->user()->password)) {
-            $data    = [
-                'password'   => Hash::make($request->passBaru),
-                'tgl_ubah'   => date('Y-m-d H:i:s'),
+        if (Hash::check($request->password, auth()->user()->password)) {
+            $data = [
+                'password' => Hash::make($request->password_baru),
+                'tgl_ubah' => date('Y-m-d H:i:s'),
             ];
 
             $this->model->data()->where('email', auth()->user()->email)->update($data);
 
-            // Mail::to(auth()->user()->email)->send(new UpdateSandiMail(Auth::user()->email));
-            // Session::flash('sukses', 'Berhasil memperbarui password');
-            return redirect()->route('profil')->with('toast_sukses', 'Berhasil Merubah password.');
+            Alert::success('Berhasil!', 'Password berhasil diubah')->position('');
+            return redirect()->route('profil');
         }
-        // Session::flash('error', 'password saat ini tidak sama.');
-        return redirect()->route('profil')->with('toast_error', 'Password Saat Ini Tidak Sama.');
+
+        Alert::error('Gagal!', 'Password saat ini tidak sama')->position('');
+        return redirect()->route('profil')->withErrors(['password' => 'Password saat ini tidak sama.']);
+    } catch (ValidationException $e) {
+        throw $e;
     }
+}
+
+    // public function updatePass(Request $request)
+    // {
+    //     $input = $request->validate([
+    //         'password'            => 'required',
+    //         // 'password_baru'       => ['required', Rules\Password::defaults()],
+    //         'password_baru'       => ['required', 'string', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]+$/'],
+    //         'konfirmasi_password' => ['same:password_baru'],
+    //     ]);
+
+    //     if (Hash::check($request->password,  auth()->user()->password)) {
+    //         $data    = [
+    //             'password'   => Hash::make($request->password_baru),
+    //             'tgl_ubah'   => date('Y-m-d H:i:s'),
+    //         ];
+
+    //         $this->model->data()->where('email', auth()->user()->email)->update($data);
+
+    //         // Mail::to(auth()->user()->email)->send(new UpdateSandiMail(Auth::user()->email));
+    //         // Session::flash('sukses', 'Berhasil memperbarui password');
+    //         return redirect()->route('profil')->with('toast_success', 'Berhasil Merubah Password.');
+    //     }
+    //     // Session::flash('error', 'password saat ini tidak sama.');
+    //     return redirect()->route('profil')->with('toast_error', 'Password Saat Ini Tidak Sama.');
+    // }
 
     public function delete($email)
     {

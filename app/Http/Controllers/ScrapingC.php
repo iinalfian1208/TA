@@ -39,24 +39,7 @@ class ScrapingC extends Controller
 
         return view('admin.pengaturan', ['total' => $data_db,'coba' => $sinta_fix, 'max_page' => $max_page]);
 
-        // $s1       = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?q=&search=1&sinta=1');
-        // $total_s1 = $s1->filter('table[class="uk-table"] > caption')->text();
 
-        // $s2       = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?q=&search=1&sinta=2');
-        // $total_s2 = $s2->filter('table[class="uk-table"] > caption')->text();
-
-        // $s3       = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?q=&search=1&sinta=3');
-        // $total_s3 = $s3->filter('table[class="uk-table"] > caption')->text();
-
-        // $s4       = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?q=&search=1&sinta=4');
-        // $total_s4 = $s4->filter('table[class="uk-table"] > caption')->text();
-
-        // $s5       = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?q=&search=1&sinta=5');
-        // $total_s5 = $s5->filter('table[class="uk-table"] > caption')->text();
-
-        // $s6       = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?q=&search=1&sinta=6');
-        // $total_s6 = $s6->filter('table[class="uk-table"] > caption')->text();
-        // return view('admin.pengaturan', ['total' => $total, 's1' => $total_s1, 's2' => $total_s2, 's3' => $total_s3, 's4' => $total_s4, 's5' => $total_s5, 's6' => $total_s6,]);
     }
 
     public function radioCheck(Request $request)
@@ -93,7 +76,7 @@ class ScrapingC extends Controller
         $end_page   = $request->end_page;
         $client     = new Client(HttpClient::create(['verify_peer' => false, 'verify_host' => false]));
         // $client = new Client();
-        ini_set('max_execution_time', 3000);
+        ini_set('max_execution_time', 3600);
         for ($i=$request->start_page; $i<=$end_page; $i++) {
             $request     = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?page='.$i);
             $detail      = $request->filter('div[class="col-lg meta-side"]')->each(function ($node) {
@@ -149,145 +132,13 @@ class ScrapingC extends Controller
                 //     return $th->getMessage();
                 // }
             });
-                // $aa[] = $this->scrapJadwal2($detail);
-            // for ($j=0; $j <count($detail) ; $j++) {
-            //     $cek_pt     = $this->pt->data()->where(['nama_pt' => $detail[$j]['pt']])->count();
-            //     if ($cek_pt == 0){
-            //         $this->pt->data()->insert(['nama_pt' => $detail[$j]['pt'], 'alamat' => $detail[$j]['alamat_pt']]);
-            //     }
-            //     $pt         = $this->pt->data()->where(['nama_pt'=> $detail[$j]['pt']])->first();
-            //     $id_pt      = $pt->id_pt;
 
-            //     $cek_jurnal = $this->jurnal->data()->where('id_jurnal', $detail[$j]['id_jurnal'])->count();
-
-            //     if ($cek_jurnal == 0) {
-            //         $this->jurnal->data()->insert([
-            //             'id_jurnal'   => $detail[$j]['id_jurnal'],
-            //             'nama_jurnal' => $detail[$j]['nama_jurnal'],
-            //             'id_pt'       => $id_pt,
-            //             'url'         => $detail[$j]['url'],
-            //             'peringkat'   => $detail[$j]['peringkat'],
-            //             'tgl_buat'    => date('Y-m-d H:i:s'),
-            //         ]);
-            //     } else {
-            //         $this->jurnal->data()->where('id_jurnal', $detail[$j]['id_jurnal'])
-            //              ->update([
-            //                 'nama_jurnal' => $detail[$j]['nama_jurnal'],
-            //                 'id_pt'       => $id_pt,
-            //                 'url'         => $detail[$j]['url'],
-            //                 'peringkat'   => $detail[$j]['peringkat'],
-            //                 'tgl_ubah'    => date('Y-m-d H:i:s'),
-            //             ]);
-            //     }
-
-            //     if ($detail[$j]['kategori'] != null) {
-            //         $kategori      = explode(',', $detail[$j]['kategori']);
-
-            //         for ($k=0; $k < count($kategori); $k++) {
-            //             $kategori_fix = str_replace(" ","",$kategori[$k]);
-            //             $cek_i_kategori = $this->iKategori->data()->where('nama_asing', $kategori_fix)->count();
-            //             if ($cek_i_kategori == 0) {
-            //                 $this->iKategori->data()->insert(['nama_asing' => $kategori_fix]);
-            //             }
-
-            //             $i_kategori = $this->iKategori->data()->where('nama_asing', $kategori_fix)->first();
-            //             $i_kategori->nama_indonesia == null ? $nama_kategori = $kategori_fix : $nama_kategori = $i_kategori->nama_indonesia;
-
-            //             $detail_kategori = [
-            //                 'id_jurnal'     => $detail[$j]['id_jurnal'],
-            //                 'nama_kategori' => $nama_kategori,
-            //             ];
-
-            //             $cek_kategori    = $this->kategori->data()->where($detail_kategori)->get();
-
-            //             count($cek_kategori) == 0 ? $this->kategori->data()->insert($detail_kategori) : $this->kategori->data()->where('id_kategori', $cek_kategori[0]->id_kategori)->update($detail_kategori);
-            //         }
-            //     }
-            // }
         }
         // return $detail;
         return redirect()->route('pengaturan')->with('toast_success', 'Berhasil menambahkan data.');
 
 
-        // for ($i=$request->start_page; $i<=$request->end_page; $i++) {
-        //     // request detail jurnal di SINTA
-        //     $request     = $client->request('GET', 'https://sinta.kemdikbud.go.id/journals?page='.$i.'&q=&search=1&sinta='.$request->peringkat.'&pub=&city=&pubid=&area=');
-        //     $url_detail  = $request->filter('a[class="text-blue"]')->each(function ($node) {
-        //         return 'https://sinta.kemdikbud.go.id'.$node->attr('href');
-        //     });
 
-        //     for ($j=0; $j<count($url_detail); $j++) {
-        //         $data       = $client->request('GET', $url_detail[$j]);
-
-        //         $data_jurnal  = $data->filter('body')->each(function ($node) {
-        //             $nama_jurnal = $node->filter('div[class="au-data uk-vertical-align-middle"] > div[class="au-name"]')->text();
-
-        //             $pt          = $node->filter('div[class="au-data uk-vertical-align-middle"] > div[class="au-department"]')->text();
-
-        //             $alamat_pt   = $node->filter('ul[class="uk-list uk-list-line"] > li')->eq(2)->text();
-        //             // $id_pt       = DB::table('t_pt')->where('nama_pt', $pt)->get();
-
-        //             $url         = $node->filter('ul[class="uk-list uk-list-line"] > li > a[href]')->attr('href');
-
-        //             $sinta       = substr($node->filter('div[class="stat2-val"]')->text(), 1);
-
-        //             $jurnal = [
-        //                 'nama_jurnal' => $nama_jurnal,
-        //                 'pt'          => substr($pt, 0, 75),
-        //                 'alamat_pt'   => substr($alamat_pt, 0, 255),
-        //                 'url'         => $url,
-        //                 'peringkat'   => $sinta,
-        //             ];
-        //             return $jurnal;
-        //         });
-
-        //         $cek_pt  = $this->pt->data()->where(['nama_pt' => $data_jurnal[0]['pt']])->count();
-        //         if ($cek_pt == 0){
-        //             $this->pt->data()->insert(['nama_pt' => $data_jurnal[0]['pt']]);
-        //         }
-
-        //         $pt     = $this->pt->data()->where(['nama_pt'=> $data_jurnal[0]['pt']])->get();
-        //         $id_pt  = $pt[0]->id_pt;
-
-        //         $jurnal_fix = [
-        //             'id_jurnal'   => explode("=", $url_detail[$j])[1],
-        //             'id_pt'       => $id_pt,
-        //             'nama_jurnal' => substr($data_jurnal[0]['nama_jurnal'], 0, 100),
-        //             'peringkat'   => $data_jurnal[0]['peringkat'],
-        //             'url'         => $data_jurnal[0]['url'],
-        //             'tgl_buat'    => date('Y-m-d H:i:s')
-        //         ];
-
-        //         $cek_jurnal   = $this->jurnal->data()->where('id_jurnal', $jurnal_fix['id_jurnal'])->count();
-
-        //         if ($cek_jurnal == 0) {
-        //             $this->jurnal->data()->insert($jurnal_fix);
-        //         }
-        //         else {
-        //             $this->jurnal->data()->where('id_jurnal', $jurnal_fix['id_jurnal'])->update($jurnal_fix);
-        //         }
-
-        //         // $cek_jurnal == 0 ? $this->jurnal->data()->insert($jurnal_fix) : $this->jurnal->data()->where('id_jurnal', $jurnal_fix['id_jurnal'])->update($jurnal_fix);
-        //         // $this->jurnal->data()->insert($jurnal_fix);
-
-        //         $kategori = $data->filter('a[class="area-item-small"]')->each(function ($node) {
-        //             return $node->text();
-        //         });
-
-        //         for ($k=0; $k < count($kategori) ; $k++) {
-        //             $detail_kategori = [
-        //                 'id_jurnal'     => $jurnal_fix['id_jurnal'],
-        //                 'nama_kategori' => $kategori[$k],
-        //             ];
-
-        //             $cek_kategori = $this->kategori->data()->where($detail_kategori)->get();
-
-        //             count($cek_kategori) == 0 ? $this->kategori->data()->insert($detail_kategori) : $this->kategori->data()->where('id_kategori', $cek_kategori[0]->id_kategori)->update($detail_kategori);
-        //         }
-        //     }
-        //     // return $jurnal_fix;
-        // }
-        // return redirect()->route('pengaturan')->with('sukses', 'Berhasil menambahkan data (Jurnal).');
     }
 
     public function ptToDb ($jurnal) {
@@ -354,7 +205,7 @@ class ScrapingC extends Controller
     {
 
         $client = new Client(HttpClient::create(['verify_peer' => false, 'verify_host' => false]));
-        ini_set('max_execution_time', 3000);
+        ini_set('max_execution_time', 3600);
         try {
             $get_url  = $client->request('GET', $url_jurnal);
             $cek_home = $get_url->filter('#home > a[href]')->attr('href');
@@ -539,71 +390,7 @@ class ScrapingC extends Controller
             $arc_pub2 = $arc_pub;
         }
 
-        // try {
-        //     $req_data_arc   = $cc->request('GET', $url_arc);
-        //     // $list_arc       = $req_data_arc->filter('h4')->each(function ($node_arc) {
-        //     //     $data       = $node_arc->text();
-        //     //     return $data;
-        //     // });
-        //     $list_arc      = $req_data_arc->filter('.pkp_structure_main')->each(function ($node_arc) {
-        //         $data       = $node_arc->text();
-        //         return $data;
-        //     });
-        //     $bulan          = $this->bulan();
-        //     for($a=0; $a<count($list_arc); $a++){
-        //         for($j=0; $j<count($bulan); $j++){
-        //             $arc_jadwal  = strripos($list_arc[$a], $bulan[$j][0]);
-        //             $arc_jadwal2 = strripos($list_arc[$a], $bulan[$j][1]);
-        //             if($arc_jadwal){
-        //                 $arc_pub[] = $j+1;
-        //             } elseif($arc_jadwal2) {
-        //                 $arc_pub[] = $j+1;
-        //             }
-        //         }
-        //     }
-        //     // try {
-        //     //     $list_arc       = $req_data_arc->filter('#issues')->each(function ($node_arc) {
-        //     //         $data       = $node_arc->text();
-        //     //         return $data;
-        //     //     });
-        //     //     $bulan          = $this->bulan();
-        //     //     for($a=0; $a<count($list_arc); $a++){
-        //     //         for($j=0; $j<count($bulan); $j++){
-        //     //             $arc_jadwal  = strripos($list_arc[$a], $bulan[$j][0]);
-        //     //             $arc_jadwal2 = strripos($list_arc[$a], $bulan[$j][1]);
-        //     //             if($arc_jadwal){
-        //     //                 $arc_pub[] = $j+1;
-        //     //             } elseif($arc_jadwal2) {
-        //     //                 $arc_pub[] = $j+1;
-        //     //             }
-        //     //         }
-        //     //     }
-        //     // } catch (\Throwable $th) {
-        //     //     $list_arc      = $req_data_arc->filter('.pkp_structure_main')->each(function ($node_arc) {
-        //     //         $data       = $node_arc->text();
-        //     //         return $data;
-        //     //     });
-        //     //     $bulan          = $this->bulan();
-        //     //     for($a=0; $a<count($list_arc); $a++){
-        //     //         for($j=0; $j<count($bulan); $j++){
-        //     //             $arc_jadwal  = strripos($list_arc[$a], $bulan[$j][0]);
-        //     //             $arc_jadwal2 = strripos($list_arc[$a], $bulan[$j][1]);
-        //     //             if($arc_jadwal){
-        //     //                 $arc_pub[] = $j+1;
-        //     //             } elseif($arc_jadwal2) {
-        //     //                 $arc_pub[] = $j+1;
-        //     //             }
-        //     //         }
-        //     //     }
-        //     // }
 
-        //     if(!$arc_pub) {
-        //         $arc_pub = [];
-        //     }
-
-        // } catch (\Throwable $th2) {
-        //     $arc_pub = [];
-        // }
         return $arc_pub2;
     }
 
@@ -735,7 +522,7 @@ class ScrapingC extends Controller
     {
         $client = new Client(HttpClient::create(['verify_peer' => false, 'verify_host' => false]));
         //$client = new Client();
-        ini_set('max_execution_time', 3000);
+        ini_set('max_execution_time', 3600);
         if ($request->peringkatPub == 0) {
             $jurnal = $this->jurnal->data()
                     ->orderBy('t_jurnal.id_jurnal', 'ASC')
@@ -831,146 +618,6 @@ class ScrapingC extends Controller
         // return $jadwal_fix;
         return redirect()->route('pengaturan')->with('toast_success', 'Berhasil menambahkan data (Jadwal Publikasi).');
 
-        //     try {
-        //         $url_arc  = $client->request('GET', $get_home->filter('#archives > a[href]')->attr('href'));
-        //         $get_about= $client->request('GET', $get_home->filter('#about > a[href]')->attr('href'));
-        //     } catch (\Throwable $th) {
-        //         $url_normal = substr($get_home, 0,-5);
-        //         $url_arc  = $client->request('GET', $url_normal.'issue/archive');
-        //         $get_about= $client->request('GET', $url_normal.'about');
-        //     }
-        //     // $url_arc  = $client->request('GET', $get_home->filter('#archives > a[href]')->attr('href'));
-        //     // return $url_arc;
 
-
-        //     // return $get_about;
-        //     // $url_pub  = $client->request('GET', $get_about);
-
-        //     // try {
-        //     //     $publikasi = $client->request('GET', $url_pub->filter('a[href$="publicationFrequency"]')->attr('href'))->filter('#publicationFrequency > p')->text();
-
-        //     //     $dataPub[$i] = [
-        //     //         'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //     //         'jadwal'    => $publikasi,
-        //     //     ];
-        //     // } catch (\Throwable $th) {
-        //     //     $publikasi = null;
-        //     //     $dataPub[$i] = [
-        //     //         'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //     //         'jadwal'    => $publikasi,
-        //     //     ];
-        //     // }
-
-        //     // try {
-        //     //     $list_jadwal = $url_arc->filter('h4')->each(function ($node) {
-        //     //         $data    = $node->text();
-
-        //     //         $bulan   = [
-        //     //             ['January','Januari'],
-        //     //             ['February', 'Februari'],
-        //     //             ['March','Maret'],
-        //     //             ['April', 'April'],
-        //     //             ['May', 'Mei'],
-        //     //             ['June','Juni'],
-        //     //             ['July', 'Juli'],
-        //     //             ['August', 'Agustus'],
-        //     //             ['September','September'],
-        //     //             ['October', 'Oktober'],
-        //     //             ['November','November'],
-        //     //             ['December', 'Desember']
-        //     //         ];
-
-        //     //         for($i=0; $i<count($bulan); $i++){
-        //     //             $jadwal = strripos($data, $bulan[$i][0]);
-        //     //             if($jadwal){
-        //     //                 $publikasi[] = $i+1;
-        //     //             }
-        //     //             else{
-        //     //                 $jadwal = strripos($data, $bulan[$i][1]);
-        //     //                 if($jadwal){
-        //     //                     $publikasi[]= $i+1;
-        //     //                 }
-        //     //             }
-        //     //         }
-        //     //         return $publikasi;
-        //     //     });
-        //     //     $merge_pub  = call_user_func_array('array_merge', $list_jadwal);
-        //     //     $data_fix   = array_unique($merge_pub);
-
-        //     //     for ($j=0; $j <count($data_fix) ; $j++) {
-        //     //         $cek_jadwal = $this->pub->data()->where([
-        //     //             'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //     //             'bulan'     => $data_fix[$j],
-        //     //         ])->first();
-
-        //     //         if ($cek_jadwal == 0) {
-        //     //             $this->pub->data()->insert([
-        //     //                 'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //     //                 'bulan'     => $data_fix[$j],
-        //     //             ]);
-        //     //         } else {
-        //     //             $this->pub->data()->where('id_jadwal', $cek_jadwal->id_jadwal)->update([
-        //     //                 'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //     //                 'bulan'     => $data_fix[$j],
-        //     //             ]);
-        //     //         }
-        //     //     }
-        //     // } catch (\Throwable $th) {
-        //     //     try {
-        //             $list_jadwal = $client->request('GET', $get_about->filter('a[href$="publicationFrequency"]')->attr('href'))->filter('#publicationFrequency > p')->text();
-
-
-        //         // var_dump($list_jadwal);
-        //         // $list_jadwal = $get_about;
-        //         // return $list_jadwal;
-
-        //         $bulan   = [
-        //             ['January','Januari'],
-        //             ['February', 'Februari'],
-        //             ['March','Maret'],
-        //             ['April', 'April'],
-        //             ['May', 'Mei'],
-        //             ['June','Juni'],
-        //             ['July', 'Juli'],
-        //             ['August', 'Agustus'],
-        //             ['September','September'],
-        //             ['October', 'Oktober'],
-        //             ['November','November'],
-        //             ['December', 'Desember']
-        //         ];
-        //         for($j=0; $j<count($bulan); $j++){
-        //             $jadwal = strripos($list_jadwal, $bulan[$j][0]);
-        //             if($jadwal){
-        //                 $publikasi[] = $j+1;
-        //             }
-        //             else{
-        //                 $jadwal = strripos($list_jadwal, $bulan[$j][1]);
-        //                 if($jadwal){
-        //                     $publikasi[]= $j+1;
-        //                 }
-        //             }
-        //         }
-
-        //         for ($k=0; $k <count($publikasi) ; $k++) {
-        //             $cek_jadwal = $this->pub->data()->where([
-        //                 'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //                 'bulan'     => $publikasi[$k],
-        //             ])->first();
-
-        //             if ($cek_jadwal == 0) {
-        //                 $this->pub->data()->insert([
-        //                     'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //                     'bulan'     => $publikasi[$k],
-        //                 ]);
-        //             } else {
-        //                 $this->pub->data()->where('id_jadwal', $cek_jadwal->id_jadwal)->update([
-        //                     'id_jurnal' => $jurnal[$i]->id_jurnal,
-        //                     'bulan'     => $publikasi[$k],
-        //                 ]);
-        //             }
-        //         }
-        //     }
-        // // }
-        // return redirect()->route('pengaturan')->with('sukses', 'Berhasil menambahkan data (Jadwal Publikasi).');
     }
 }

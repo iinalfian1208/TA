@@ -140,10 +140,10 @@ class DataPtC extends Controller
         $cek = $this->model->data()->where('nama_pt', $request->nama_pt)->count();
 
         // if ($cek == 0) {
-        //     Session::flash('toast_error', 'Data sudah ada');
+        //     Session::flash('error', 'Data sudah ada');
         // } else {
             $this->model->data()->insert($data);
-            Session::flash('toast_success', 'Berhasil menambahkan data');
+            Session::flash('success', 'Berhasil menambahkan data');
         // }
         return redirect()->route('daftar_pt');
     }
@@ -166,7 +166,7 @@ class DataPtC extends Controller
         //     Session::flash('gagal', 'Tidak dapat memperbarui data, data sudah ada');
         // } else {
             $this->model->data()->where('id_pt', $kode)->update($data);
-            Session::flash('toast_success', 'Berhasil memperbarui data');
+            Session::flash('success', 'Berhasil memperbarui data');
         // }
         return redirect()->route('daftar_pt');
     }
@@ -175,16 +175,16 @@ class DataPtC extends Controller
     {
         try {
             $query = $this->model->data()->where('id_pt', $kode)->delete();
-            return redirect()->route('daftar_pt')->with('toast_success', 'Berhasil Menghapus Data User');
+            return redirect()->route('daftar_pt')->with('success', 'Berhasil Menghapus Data User');
         } catch (Exception $e) {
-            return redirect()->route('daftar_pt')->with('toast_error', 'Gagal Menghapus Data User');
+            return redirect()->route('daftar_pt')->with('error', 'Gagal Menghapus Data User');
         }
 
     }
     // public function delete($kode)
     // {
     //     $this->model->data()->where('id_pt', $kode)->delete();
-    //     Session::flash('toast_success', 'Berhasil menghapus data');
+    //     Session::flash('success', 'Berhasil menghapus data');
     //     return redirect()->route('daftar_pt');
     // }
 }
