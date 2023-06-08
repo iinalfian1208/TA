@@ -175,9 +175,9 @@ class DataPtC extends Controller
     {
         try {
             $query = $this->model->data()->where('id_pt', $kode)->delete();
-            return redirect()->route('daftar_pt')->with('success', 'Berhasil Menghapus Data User');
+            return redirect()->route('daftar_pt')->with('success', 'Berhasil Menghapus Data Perguruan Tinggi');
         } catch (Exception $e) {
-            return redirect()->route('daftar_pt')->with('error', 'Gagal Menghapus Data User');
+            return redirect()->route('daftar_pt')->with('error', 'Gagal Menghapus Data Perguruan Tinggi');
         }
 
     }

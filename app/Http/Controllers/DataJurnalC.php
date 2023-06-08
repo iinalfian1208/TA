@@ -56,8 +56,9 @@ class DataJurnalC extends Controller
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body m-2">
-                                <div class="mb-3">
-                                    Yakin ingin menghapus perguruan tinggi<strong style="margin: top 10px;"> '.$row->nama_jurnal.' ?</strong>
+                                <div class="">
+                                    <p class="mb-2">Yakin ingin menghapus perguruan tinggi</p><br>
+                                    <strong style="margin: top 10px;">'.$row->nama_jurnal.' ?</strong>
                                 </div>
                                 <div class="">
                                 </div>

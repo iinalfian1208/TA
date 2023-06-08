@@ -3,7 +3,7 @@
 <head>
     <title>Jurnal Scraping</title>
 
-    <link rel="shortcut icon" href="{{ asset('/images/sinta/sintalogo.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="500x500"/>
     <style type="text/css">
         .italic {
             font-style: italic;
@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{ asset('coba3/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}">
 
 </head>
 {{-- @section('tentang') --}}
@@ -116,7 +117,7 @@
                                 </div>
                                     @if (!empty($d->balas))
                                     @foreach ( $d->balas as $item)
-                                    
+
                                     <div class="media mt-3 comment" style="background-color: #6c757d"> <a
                                             href="#"><img
                                                 src="https://img.icons8.com/bubbles/100/000000/lock-male-user.png"
@@ -139,6 +140,10 @@
 
         </div>
     </section>
+    <footer class="footer mt-auto  text-end" style="background-color: #081c5c">
+        <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+            {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
+    </footer>
 </section>
 <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
  <div class="modal-dialog modal-dialog-centered">

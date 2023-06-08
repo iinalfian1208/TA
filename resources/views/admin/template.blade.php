@@ -92,15 +92,15 @@
                                 <button class="badge badge-pill badge-danger float-right text-white">Hapus Notifikasi</button>
                             </a>
                             <div class="dropdown-divider"></div>
-                            @foreach ( $notifpesan as $item2 )
+                            @foreach ( $notifpesan as $item )
                             <a class="dropdown-item preview-item" href="{{ route('daftar-chat') }}"  >
                                 <div class="preview-thumbnail">
                                     <img src="{{ asset('images/sinta/pesa.jpg') }}" alt="image" class="">
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
-                                    <p class="widget-media dz-scroll height380">{{ $item2->nama }} mengirim chat untuk anda </p>
+                                    <p class="widget-media dz-scroll height380">{{ $item->nama }} mengirim chat untuk anda </p>
                                     <p class="widget-media dz-scroll height380 mt-1">Klik untuk membalasnya</p>
-                                    <p class="fw-light small-text mb-0"> {{ $item2->created_at }}</p>
+                                    <p class="fw-light small-text mb-0"> {{ $item->created_at }}</p>
                                 </div>
                             </a>
                             @endforeach
@@ -126,7 +126,7 @@
                                 </div>
                                 <div class="preview-item-content flex-grow py-2">
                                     <p class="widget-media dz-scroll height380">{{ $item->nama }} mengirim chat untuk anda </p>
-                                    <p class="widget-media dz-scroll height380 mt-1">Klik untuk embalasnya</p>
+                                    <p class="widget-media dz-scroll height380 mt-1">Klik untuk Membalasnya</p>
                                     <p class="fw-light small-text mb-0"> {{ $item->created_at }}</p>
                                 </div>
                             </a>
@@ -171,12 +171,12 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link count-indicator" id="countDropdown" href="#" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img class="img-xs rounded-circle" src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image"> </a>
+                        <img class="img-xs rounded-circle" src="{{ asset('images/faces/profile/profil.png') }}" alt="Profile image"> </a>
 
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <div class="dropdown-header text-center">
-                            <img class="mdi mdi-account-box " src="{{ asset('images/faces/face8.jpg') }}" alt="Profile image">
+                            <img class="img-xs rounded-circle" src="{{ asset('images/faces/profile/profil.png') }}" alt="Profile image">
                         </div>
                          <a class="dropdown-item {{ request()->is('profil') ? 'active' : '' }}"
                             href="{{ route('profil') }}"><i

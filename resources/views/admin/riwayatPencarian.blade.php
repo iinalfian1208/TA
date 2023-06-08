@@ -4,7 +4,7 @@
 <div class="main-panel">
     <div class="content-wrapper">
         <h1 class="h3 mb-2 text-black fw-bold">Riwayat Pencarian</h1>
-        @if ($message = Session::get('sukses'))
+        {{-- @if ($message = Session::get('sukses'))
 			<div class="alert alert-success alert-dismissible" role="alert">
 				<div class="alert-message">
 					<strong>{{ $message }}</strong>
@@ -17,7 +17,7 @@
 					<strong>{{ $message }}</strong>
 				</div>
 			</div>
-		@endif
+		@endif --}}
       <div class="row">
         <div class="col-lg-6 grid-margin stretch-card">
           <div class="card"></div>
@@ -43,7 +43,7 @@
                 </form>
             {{-- </div> --}}
               <div class="table-responsive">
-                <table id="example" class="table table-sm table-striped" style="width:100%">
+                <table id="myTable" class="table table-striped table-borderless" style="width:100%; padding-top:50px;">
                   <thead>
                     <tr>
                         <th class="text-center">No</th>
@@ -58,8 +58,8 @@
                     @endphp
                     @foreach($data as $d)
                     <tr>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ $d->ip_address }}</td>
+                    <td class="text-center" style="padding-top: 2%; padding-bottom:2%;">{{ $no++ }}</td>
+                    <td class="mb-3">{{ $d->ip_address }}</td>
                     <td>{{ $d->kata_kunci }}</td>
                     <td>{{ $d->tgl_pencarian }}</td>
                     </tr>

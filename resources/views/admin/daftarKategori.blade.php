@@ -61,11 +61,11 @@
                 <table id="" class="table table-sm table table-striped">
                   <thead>
                     <tr>
-                      <th >No</th>
-                      <th >Nama Kategori</th>
-                      <th>Total Jurnal</th>
+                      <th class="text-center">No</th>
+                      <th class="text-center">Nama Kategori</th>
+                      <th class="text-center">Total Jurnal</th>
                       @if (Auth::user()->level == 1)
-                      <th>Aksi</th>
+                      <th class="text-center">Aksi</th>
                       @endif
                     </tr>
                   </thead>
@@ -74,8 +74,8 @@
                      $no = 1;
                     @endphp
                      @foreach($data as $d)
-                    <tr>
-                        <td>{{ $no++ }}</td>
+                    <tr class="text-center">
+                        <td style="padding-top: 2%; padding-bottom:2%;" class="text-center">{{ $no++ }}</td>
                       <td>{{ $d->nama_kategori}}</td>
                       @php
 					    if ($d->total == 1) {

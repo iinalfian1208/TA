@@ -2,8 +2,8 @@
 <head>
     <title>Jurnal Scraping</title>
 
-  <link rel="shortcut icon" href="{{ asset('/images/sinta/sintalogo.png') }}" />
-
+    <link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="500x500"/>
+    <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}">
 </head>
 <body class="sub_page">
 
@@ -59,25 +59,36 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <div class="img-box">
-            <img src="home/images/about-img2.png" alt="">
-          </div>
-        </div>
-        <div class="col-md-6">
             <div class="detail-box">
               <div class="heading_container">
                 <h2>
                  Tentang
                 </h2>
               </div>
-              <p>
-                  Website Jurnal Scraping memberikan informasi tentang jadwal publikasi dari berbagai jurnal yang terakreditasi SINTA
-              </p>
-              <a href="https://sinta.kemdikbud.go.id/">
-                Read More
-              </a>
+              <ul class="list-star">
+                <li class="mb-2">
+                Website Jurnal Scraping memberikan informasi tentang jadwal publikasi dari berbagai jurnal yang terakreditasi SINTA
+
+                </li>
+                 <li class="mb-2">
+                    Keseluruhan data didapatkan dari website resmi jurnal terkait
+                </li>
+                <li class="mb-2">
+                    Beberapa jurnal mungkin tidak memiliki data tersebut, sehingga jadwal publikasi bernilai null
+                </li>
+               </ul>
+
+            <a href="https://sinta.kemdikbud.go.id/">
+              Temukan di Website Sinta
+            </a>
             </div>
           </div>
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{{ asset('home/images/about-img2.png') }}" alt="">
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -85,13 +96,10 @@
   <!-- end about section -->
 
 
-  <div class="footer_bg">
-
-    <!-- contact section -->
-
-
-  </div>
-
+  <footer class="footer mt-auto  text-end" style="background-color: #1a237e">
+    <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+        {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
+</footer>
 
 </body>
 

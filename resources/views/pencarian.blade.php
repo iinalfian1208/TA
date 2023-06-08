@@ -1,4 +1,8 @@
 @extends('template')
+<head>
+
+    <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}">
+</head>
 @section('home')
 <body>
     <header class="header_section">
@@ -54,7 +58,7 @@
                 <div class="col-md-1 "></div>
                 <div class="col-md-6">
                   <div class="detail_box">
-                    <h1>
+                    <h1 class="text-white">
                       Website Jurnal Scraping
                     </h1>
                     <p>
@@ -85,7 +89,7 @@
                 <div class="col-md-1 "></div>
                 <div class="col-md-6 ">
                    <div class="detail_box">
-                    <h1>
+                    <h1 class="text-white">
                       Website Jurnal Scraping
                     </h1>
                     <p>
@@ -167,7 +171,7 @@
   <section class="service_section layout_padding">
     <div class="container-fluid">
       <div class="heading_container">
-        <h2>
+        <h2 class="text-white">
         Tingkatan Dalam Jurnal Sinta
         </h2>
         <p>
@@ -181,7 +185,7 @@
             <img src="{{ asset('images/sinta/s1.png') }}" alt="" height="60px">
           </div>
           <div class="detail-box">
-            <h5>
+            <h5 class="text-white">
                 Sinta 1
             </h5>
             <p>
@@ -194,7 +198,7 @@
             <img src="{{ asset('images/sinta/s2.png') }}" alt="" height="60px">
           </div>
           <div class="detail-box">
-            <h5>
+            <h5 class="text-white">
                 Sinta 2
             </h5>
             <p>
@@ -207,7 +211,7 @@
             <img src="{{ asset('images/sinta/s3.png') }}" alt="" height="60px">
           </div>
           <div class="detail-box">
-            <h5>
+            <h5 class="text-white">
                 Sinta 3
             </h5>
             <p>
@@ -220,7 +224,7 @@
             <img src="{{ asset('images/sinta/s4.png') }}" alt="" height="60px">
           </div>
           <div class="detail-box">
-            <h5>
+            <h5 class="text-white">
                 Sinta 4
             </h5>
             <p>
@@ -233,7 +237,7 @@
             <img src="{{ asset('images/sinta/s5.jpg') }}" alt="" height="60px">
           </div>
           <div class="detail-box">
-            <h5>
+            <h5 class="text-white">
                 Sinta 5
             </h5>
             <p>
@@ -246,7 +250,7 @@
                 <img src="{{ asset('images/sinta/s6.png') }}" alt="https://journal.staidenpasar.ac.id/public/site/images/admin/s6.png">
             </div>
             <div class="detail-box">
-              <h5>
+              <h5 class="text-white">
                   Sinta 6
               </h5>
               <p>
@@ -343,12 +347,13 @@
         </a>
       </div> --}}
     </div>
+
   </section>
   <!-- end work section -->
 
   <!-- team section -->
 
- 
+
   <!-- end team section -->
 
   <!-- client section -->
@@ -364,7 +369,10 @@
   <div class="spinner-border text-success" role="status">
     <span class="sr-only">Loading...</span>
   </div> --}}
-
+  <footer class="footer mt-auto  text-end" style="background-color: #081c5c">
+    <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+        {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
+</footer>
 
 </body>
 

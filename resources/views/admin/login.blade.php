@@ -28,6 +28,11 @@
             'anonymize_ip': true
         });
     </script>
+    <style>
+        body{
+            overflow-y: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,14 +47,14 @@
                 <div class="col-lg-6">
                     <div class="row">
                         <div class="col-12 text-center mt-5">
-                            <h4 class="text-center" style="text-align: center"><strong>Lupa Password</strong></h4>
+                            <h4 class="text-center" style="text-align: center"><strong>LOGIN</strong></h4>
                         </div>
                         {{-- <div class="row2 px-3 mb-3 text-center">
                             <h1 class="h3 mb-4 "><strong>Login</strong></h1>
                         </div> --}}
                         <div class="col-12">
                             <div class="m-sm-0">
-                                @if (session('status'))
+                                {{-- @if (session('status'))
                                     <div class="alert alert-success alert-dismissible" role="alert">
                                         <div class="alert-message">
                                             <strong>{{ session('status') }}</strong>
@@ -62,7 +67,7 @@
                                             <strong>{{ $message }}</strong>
                                         </div>
                                     </div>
-                                @enderror
+                                @enderror --}}
                                 <form method="POST" action="{{ route('login') }}">
                                     {{ csrf_field() }}
                                 <div class="row px-3">
@@ -86,12 +91,17 @@
                 </div>
             </div>
         </div>
+        <footer class="footer mt-auto  text-end" style="background-color: #1a237e">
+            <h5 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h5>
+                {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
+        </footer>
     </div>
-    <footer class="footer mt-auto py-3">
+    {{-- <footer class="footer mt-auto py-3">
         <div class="container-fluid bg-blue py-4">
             <small class="ml-4 ml-sm-5 mb-2 mr-5">Jurnal Scraping 2023</small>
         </div>
-    </footer>
+    </footer> --}}
+    @include('sweetalert::alert')
 </body>
 
 

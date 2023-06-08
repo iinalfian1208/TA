@@ -43,7 +43,7 @@
                         {{-- <h1 class="mt-1 mb-2">1500</h1> --}}
 						<h1 class="mt-1 mb-3">{{ $total }}</h1>
 						<div class="mb-0 d-flex align-items-center d-flex justify-content-between">
-							<span class="text-muted ">Total Jurnal</span>
+							<span class="text-muted " >Total Jurnal</span>
                             <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 Mulai Scraping
                             </button></a></h4>
@@ -61,8 +61,8 @@
 
 										<div class="mb-3">
 											<div class="col-auto">
-												<p class="form-control form-control-md bg-light border-0" name="total" id="totalInSinta">{{ $coba }} (Pada Sinta)</p>
-												<p class="form-control form-control-md bg-light border-0" name="total" id="totalInDb">Jumlah di Database {{ $total }}</p>
+												<p class="form-control form-control-md border-0" style="background-color: #a0b4b6" name="total" id="totalInSinta">{{ $coba }} (Pada Sinta)</p>
+												<p class="form-control form-control-md border-0" name="total" style="background-color: #a0b4b6" id="totalInDb">Jumlah di Database {{ $total }}</p>
                                                 {{-- <p class="form-control form-control-md bg-light border-0" name="total" id="totalInSinta">177 (Pada Sinta)</p>
 												<p class="form-control form-control-md bg-light border-0" name="total" id="totalInDb">Jumlah di Database 1500</p> --}}
 											</div>
@@ -260,7 +260,7 @@
 					if (response.cek == 0) {
 						$("#dataJurnal").text('Perlu melakukan scraping data jurnal');
 					} else {
-						$("#dataJurnal").text('Total jurnal: '+response.jurnal);
+						$("#dataJurnal").text('Total Jurnal: '+response.jurnal);
 						$("#scrappub").show();
 						$('input[name="end_pub"]').attr('max', response.jurnal);
 						$('input[name="end_pub"]').attr('min', 1);

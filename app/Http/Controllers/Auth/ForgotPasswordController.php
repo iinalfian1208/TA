@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use DB; 
-use Carbon\Carbon; 
+use DB;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\DataAdminM;
@@ -43,8 +43,8 @@ class ForgotPasswordController extends Controller
         $data   = $this->model->data()->where('email', $request->email)->get();
 
         DB::table('password_resets')->insert([
-            'email' => $request->email, 
-            'token' => $token, 
+            'email' => $request->email,
+            'token' => $token,
             'created_at' => Carbon::now()
         ]);
 
@@ -54,6 +54,6 @@ class ForgotPasswordController extends Controller
         // });
         Mail::to($request->email)->send(new LupaSandiMail($data[0]->nama_admin, $token));
 
-        return back()->with('message', 'We have e-mailed your password reset link!');
+        return back()->with('success', 'We have e-mailed your password reset link!');
     }
 }

@@ -53,14 +53,14 @@ class LoginController extends Controller
         {
             if (auth()->user()->level == 1) {
                 Session::put('email', auth()->user()->email);
-                return redirect()->route('beranda');
+                return redirect()->route('beranda')->with('success', 'Selamat datang Di Halaman Beranda');
             } else {
                 Session::put('email', auth()->user()->email);
-                return redirect()->route('beranda');
+                return redirect()->route('beranda')->with('success', 'Selamat datang Di Halaman Beranda');
             }
         }else{
-            Session::flash('gagal', 'Email atau Password Anda salah');
-            return redirect()->route('login');
+            // Session::flash('error', 'Email atau Password Anda salah');
+            return redirect()->route('login')->with('error', 'Email atau Password Anda salah');
         }
 
     }

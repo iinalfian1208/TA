@@ -159,6 +159,7 @@
     </footer>
     <!-- partial -->
   </div>
+  @include('sweetalert::alert')
   <script>
     document.addEventListener("DOMContentLoaded", function() {
         // Bar chart

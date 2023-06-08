@@ -3,6 +3,8 @@
     <title>Jurnal Scraping</title>
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> --}}
   <link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="100x100"/>
+  <link rel="stylesheet" href="{{ asset('home/css/login.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}"> --}}
 
 </head>
 {{-- @section('tentang') --}}
@@ -174,12 +176,12 @@
                                             @endswitch
                                             <div class="col-sm-6">
                                                 <div div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="jadwal[]" name="jadwal[]" value="{{ $j }}"
+                                                    <input class="form-check-input border"  type="checkbox" id="jadwal[]" name="jadwal[]" value="{{ $j }}"
                                                         @if(is_array(old('jadwal')) && in_array($j, old('jadwal')) && !Route::is('pencarian'))
                                                             checked
                                                         @endif
                                                     >
-                                                    <label class="form-check-label">{{ $bln }}</label>
+                                                    <label class="form-check-label" >{{ $bln }}</label>
                                                 </div>
                                             </div>
                                         @endfor
@@ -338,8 +340,9 @@
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5" style="background-color: rgba(4,24,88,255)">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Jurnal Scraping 2022</p></div>
+        <footer class="footer mt-auto  text-end" style="background-color: #081c5c">
+            <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+                {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

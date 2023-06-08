@@ -135,7 +135,7 @@ class ScrapingC extends Controller
 
         }
         // return $detail;
-        return redirect()->route('pengaturan')->with('toast_success', 'Berhasil menambahkan data.');
+        return redirect()->route('pengaturan')->with('success', 'Berhasil menambahkan data.');
 
 
 
@@ -616,7 +616,7 @@ class ScrapingC extends Controller
             // }
         }
         // return $jadwal_fix;
-        return redirect()->route('pengaturan')->with('toast_success', 'Berhasil menambahkan data (Jadwal Publikasi).');
+        return redirect()->route('pengaturan')->with('success', 'Berhasil menambahkan data (Jadwal Publikasi).');
 
 
     }

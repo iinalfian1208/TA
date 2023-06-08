@@ -90,28 +90,34 @@
   </div>
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
-        var table = $("#tableData").DataTable({
-            processing: true,
-            serverSide: true,
-            ordering: true,
-            ajax: "{{ route('daftar_pt.json') }}",
-            buttons: false,
-            searching: true,
-            scrollY: true,
-            scrollX: true,
-            responsive: true,
-            columns: [
-                { data: 'DT_RowIndex', orderable: false, searchable: false },
-                { data: 'nama_pt', name: 'nama_pt' },
-                { data: 'alamat', name: 'alamat' },
-                @if (Auth::user()->level == 1)
-                    { data: 'action', name: 'action', orderable: false, searchable: false },
-                @endif
-
-            ]
-        });
+   $(document).ready(function () {
+    var table = $("#tableData").DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: true,
+        ajax: "{{ route('daftar_pt.json') }}",
+        buttons: false,
+        searching: true,
+        scrollY: true,
+        scrollX: true,
+        responsive: true,
+        columns: [
+            { data: 'DT_RowIndex', orderable: false, searchable: false },
+            { data: 'nama_pt', name: 'nama_pt' },
+            { data: 'alamat', name: 'alamat' },
+            @if (Auth::user()->level == 1)
+                { data: 'action', name: 'action', orderable: false, searchable: false },
+            @endif
+        ],
+        createdRow: function (row, data, dataIndex) {
+            // Menambahkan gaya pada setiap data dalam tabel hanya untuk admin
+            if ("{{ Auth::user()->level == 2}}") {
+                $(row).find('td').css('padding', '2%');
+            }
+        }
     });
+});
+
 </script>
   @include('sweetalert::alert')
 @endsection
