@@ -92,7 +92,7 @@
   <script type="text/javascript">
    $(document).ready(function () {
     var table = $("#tableData").DataTable({
-        processing: true,
+        // processing: true,
         serverSide: true,
         ordering: true,
         ajax: "{{ route('daftar_pt.json') }}",

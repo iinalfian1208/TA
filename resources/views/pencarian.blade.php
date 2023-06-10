@@ -1,11 +1,10 @@
 @extends('template')
-{{-- <head>
 
-    <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}">
-</head> --}}
 @section('home')
 <body>
+   
     <header class="header_section">
+
         <div class="container-fluid">
           <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="pencarian.html">

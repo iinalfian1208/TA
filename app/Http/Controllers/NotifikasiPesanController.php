@@ -17,8 +17,6 @@ class NotifikasiPesanController extends Controller
             $key->delete();
             # code...
         }
-
-
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Berhasil Menghapus Notifikasi Pesan');
     }
 }

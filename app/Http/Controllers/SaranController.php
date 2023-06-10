@@ -15,18 +15,19 @@ use Illuminate\Support\Facades\DB;
 class SaranController extends Controller
 {
     //
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->model = new DataSaran();
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     $this->model = new DataSaran();
+    // }
+    
     public function index(){
 
         $data = DataSaran::where('is_admin', 'Salah')->orderBy('tanggal', 'DESC')->get();
         // $kode = $this->CekCaptcha();
 
-        // return view('saran', ['data' => $data, 'kode' => $kode]);
         return view('saran', ['data' => $data]);
+
 
     }
     public function adminSaran(){

@@ -19,9 +19,9 @@ class NotifikasiController extends Controller
             }
 
 
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Berhasil Menghapus Notifikasi Saran');
         }
-       
+
 
 
 }

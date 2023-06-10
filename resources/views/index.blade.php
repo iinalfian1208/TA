@@ -88,7 +88,7 @@
                                                 </div>
                                                 <div class="col-8 text-right">
                                                     <button type="submit" class="btn btn-sm btn-primary" style="border-radius: 40px">Terapkan</button>
-                                                    <button type="button" class="btn btn-sm btn-danger" style="border-radius: 40px" onclick="redirectToIndex()">Refresh</button>
+                                                    <button type="button" class="btn btn-sm btn-secondary" style="border-radius: 40px" onclick="redirectToIndex()">Refresh</button>
                                                 </div>
 
                                             </div>
