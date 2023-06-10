@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link class="js-stylesheet" href="{{ url('backup/admin/css/light.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('home/css/load.css') }}">
 
 
     <script src="{{ asset('backup/js/settings.js') }}"></script>
@@ -32,6 +33,13 @@
 </head>
 
 <body>
+    <div class="loader-wrapper">
+        <div class="theme-loader">
+            <div class="loader-p">
+
+            </div>
+        </div>
+    </div>
     <div class="main">
         <div class="container-fluid">
             <div class="row d-flex">
@@ -109,6 +117,11 @@
                 localStorage.setItem('popState', 'shown');
             }
         }, 15000);
+    });
+</script>
+<script>
+    $('.loader-wrapper').fadeOut('slow', function() {
+        $(this).remove();
     });
 </script>
 @include('sweetalert::alert')

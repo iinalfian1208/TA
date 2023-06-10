@@ -66,7 +66,7 @@
                     Berikan Saran Anda
                 </h2>
                 <p>
-                    Berikan Kontribusi Pada Website Jurnal Scraping Agar Meningkatkan Kinerja Dalam MEmberikan Informasi
+                    Berikan Kontribusi Pada Website Jurnal Scraping Agar Meningkatkan Kinerja Dalam Memberikan Informasi
                 </p>
                 <div class="btn-box">
                     <a type="button" class="btn btn-primary" data-toggle="modal" data-target="#tambah">Tambahkan
