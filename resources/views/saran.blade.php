@@ -58,7 +58,7 @@
         </header>
         <!-- end header section -->
     </div>
-    <section class="service_section layout_padding" style="background-color: white">
+    <section class="service_section layout_padding" style="background-color: white; height:90vh">
         <div class="container-fluid">
 
             <div class="heading_container" style="color:black ">
@@ -180,11 +180,12 @@
     </div>
     </div>
     </div>
-        <footer class="navbar navbar-expand-lg custom_nav-container " style="background-color: #081c5c">
-            <a class="navbar-brand text-right" href="" style="width: 100%">
-                <h6 class="text-right text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
-            </a>
-        </footer>
+    <footer class="navbar navbar-expand-lg custom_nav-container " style="background-color: #081c5c">
+        <a class="navbar-brand text-right" href="" style="width: 100%">
+            <h6 class="text-right text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+        </a>
+    </footer>
+
 @push('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -202,4 +203,5 @@
 @endpush
 @include('sweetalert::alert')
 @stack('scripts')
+
 </body>
