@@ -33,15 +33,7 @@ Route::get('/admin_saran1','SaranController@balasSaran')->name('balasSaran');
 Route::get('/reload-captcha','SaranController@reloadCaptcha')->name('reloadCaptcha');
 Route::get('/hapusnotif','NotifikasiController@delete')->name('hapusnotif');
 Route::get('/hapusnotifpesan','NotifikasiPesanController@deletepesan')->name('hapusnotifpesan');
-// Route::get('/cekCaptcha','SaranController@CekCaptcha')->name('CekCaptcha');
-// Route::get('/admin_saran', function () {
-//     return view('admin.saran');
-// });
 Route::get('/saran',  'SaranController@index')->name('tampil');
-// Route::get('/', 'PencarianC@index')->name('pencarian');
-// Route::get('/saran', function () {
-//     return view('saran');
-// })->name('saraaan');
 Route::get('/saran1','SaranController@saran')->name('saran1');
 
 Route::get('/pencarian', 'PencarianC@searchKey')->name('search');
@@ -91,15 +83,17 @@ Route::middleware(['role: 1'])->group(function (){
     Route::post('/daftar_jurnal/tambah', 'DataJurnalC@create')->name('jurnal_tambah');
     Route::delete('/daftar_jurnal/hapus/{kode}', 'DataJurnalC@delete');
 
+    Route::delete('/admin_saran/hapus/{kode}', 'SaranController@delete')->name('hapus_saran');
 
-    Route::post('/detail_jurnal/edit/{kode}', 'DataJurnalC@update');
-    Route::post('/detail_jurnal/tambah/kat/{kode}', 'DataJurnalC@createJK');
-    Route::post('/detail_jurnal/edit/kat/{kode}', 'DataJurnalC@updateJK');
-    Route::delete('/detail_jurnal/hapus/kat/{kode}', 'DataJurnalC@deleteJK');
 
-    Route::post('/detail_jurnal/tambah/jp/{kode}', 'DataJurnalC@createJP');
-    Route::post('/detail_jurnal/edit/jp/{kode}', 'DataJurnalC@updateJP');
-    Route::delete('/detail_jurnal/hapus/jp/{kode}', 'DataJurnalC@deleteJP');
+    // Route::post('/detail_jurnal/edit/{kode}', 'DataJurnalC@update');
+    // Route::post('/detail_jurnal/tambah/kat/{kode}', 'DataJurnalC@createJK');
+    // Route::post('/detail_jurnal/edit/kat/{kode}', 'DataJurnalC@updateJK');
+    // Route::delete('/detail_jurnal/hapus/kat/{kode}', 'DataJurnalC@deleteJK');
+
+    // Route::post('/detail_jurnal/tambah/jp/{kode}', 'DataJurnalC@createJP');
+    // Route::post('/detail_jurnal/edit/jp/{kode}', 'DataJurnalC@updateJP');
+    // Route::delete('/detail_jurnal/hapus/jp/{kode}', 'DataJurnalC@deleteJP');
 });
 
 Route::post('/daftar_pt/get', 'DataPtC@getPT')->name('get_pt');
@@ -107,5 +101,12 @@ Route::post('/daftar_pt/edit', 'DataPtC@update')->name('edit_pt');
 Route::post('/daftar_pt/hapus', 'DataPtC@hapus')->name('hapus_pt');
 
 Route::get('/lupa_password', 'Auth\ForgotPasswordController@index');
+Route::post('/detail_jurnal/edit/{kode}', 'DataJurnalC@update');
+Route::post('/detail_jurnal/tambah/kat/{kode}', 'DataJurnalC@createJK');
+Route::post('/detail_jurnal/edit/kat/{kode}', 'DataJurnalC@updateJK');
+Route::delete('/detail_jurnal/hapus/kat/{kode}', 'DataJurnalC@deleteJK');
+Route::post('/detail_jurnal/tambah/jp/{kode}', 'DataJurnalC@createJP');
+Route::post('/detail_jurnal/edit/jp/{kode}', 'DataJurnalC@updateJP');
+Route::delete('/detail_jurnal/hapus/jp/{kode}', 'DataJurnalC@deleteJP');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

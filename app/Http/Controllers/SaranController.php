@@ -10,10 +10,16 @@ use App\Models\NotifikasiM;
 use Illuminate\Http\Request;
 use App\Models\DataBalasSaran;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class SaranController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->model = new DataSaran();
+    }
     public function index(){
 
         $data = DataSaran::where('is_admin', 'Salah')->orderBy('tanggal', 'DESC')->get();
@@ -88,36 +94,11 @@ class SaranController extends Controller
     {
         return response()->json(['captcha'=> captcha_img('math' )]);
     }
-    // public function CekCaptcha() {
-    //     function acakCaptcha() {
-    //         $kode = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-    //         $pass = array();
-    //         $panjangkode = strlen($kode) - 2;
-    //         for ($i = 0; $i < 5; $i++) {
-    //             $n = rand(0, $panjangkode);
-    //             $pass[] = $kode[$n];
-    //         }
-    //         return implode($pass);
-    //     }
-    //     //hasil kode acak disimpan di $code
-    //     $code = acakCaptcha();
-    //     //kode acak disimpan di dalam session agar data dapat dipassing ke halaman lain
-    //     Session::flash('codeCaptcha', $code);
-    //     // dd($code);
 
-    //     return $code;
+    public function delete($kode)
+    {
+        DB::table('t_saran')->where('idSaran', $kode)->delete();
+        return back()->with('success', 'Berhasil Menghapus Data Saran');
+    }
 
-    //     //membuat background
-    //     // $wh = imagecreatetruecolor(173, 50);
-    //     // $bgc = imagecolorallocate($wh, 22, 86, 165);
-    //     //membuat text warna
-    //     // $fc = imagecolorallocate($wh, 223, 230, 233);
-    //     // imagefill($wh, 0, 0, $bgc);
-    //     // imagestring($wh, 10, 50, 15,  $code, $fc);
-
-    //     //membuat gambar
-    //     // header('content-type: image/jpg');
-    //     // imagejpeg($wh);
-    //     // imagedestroy($wh);
-    // }
 }

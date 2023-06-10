@@ -48,24 +48,20 @@
                                     <div class="d-flex align-items-center d-flex justify-content-between mb-2">
                                         <label class="form-label mb-0" for="inputUsername">URL</label>
                                         <a href="{{ $data->url }}"  class="btn btn-sm btn-pill btn-primary mb-1" target="_blank"  name="simpan" id="simpan" type="btn" target="_blank">Kunjungi Website</a>
-                                        {{-- <button type="button" class="btn btn-sm btn-pill btn-primary mb-1" name="simpan" id="simpan">
-                                            <a href="{{ $data->url }}" target="_blank" style="color : white">Kunjungi Website</a>
-                                        </button> --}}
                                     </div>
-                                    <input type="url" class="form-control" row="3" id="url" name="url" placeholder="URL" value="{{ $data->url }}" required>
+                                    <input type="url" class="form-control" row="4" id="url" name="url" placeholder="URL" value="{{ $data->url }}" required>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="inputUsername">Nama Jurnal</label>
                                     <textarea name="nama_jurnal" class="form-control h-75" rows="3"  max= "50px"id="nama_jurnal" required>{{ $data->nama_jurnal }}</textarea>
-                                    {{-- <input type="text" class="form-control" id="nama_jurnal" name="nama_jurnal" placeholder="{{ $data->nama_jurnal }}" value="" required> --}}
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label" for="inputUsername">Perguruan Tinggi</label>
-                                    <select class="form-control text-black" class="text-black" id="pt" name="pt" required>
+
+                                    <select class="form-control text-black" class="text-black" id="id_pt" name="id_pt" required>
+
                                         <option value="{{ $data->id_pt }}" class="text-black">{{ $data->nama_pt }}</option>
-                                        {{-- <option disabled>Choose...</option> --}}
-                                        {{-- @foreach ($kategori as $kategori)
-                                        <option value="{{ $kategori->id_kategori }}">{{ $kategori->nama_kategori }}</option> --}}
+
                                     </select>
                                 </div>
                                 <div class="row">
@@ -97,14 +93,10 @@
             </div>
         </div>
         <div class="col-md-12 grid-margin stretch-card">
-            {{-- <div class="card"> --}}
               <div class="card">
                   <div class="card-header">
-                      <h5 class="card-title mb-2 mt-2">Data Publikasi Jurnal</h5>
+                      <h5 class="card-title mb-2 mt-2">Data Kategori Jurnal</h5>
                   </div>
-                  {{-- @php
-                      $image = DB::table('gambar')->where('produk_id', $p->id_produk)->get();
-                  @endphp --}}
                   <div class="card-body">
                     <form action="/detail_jurnal/tambah/kat/{{ $data->id_jurnal }}" method="post" enctype="multipart/form-data">
                         {{ csrf_field() }}
@@ -115,7 +107,6 @@
                                     <select class="form-control " id="kategori" name="kategori">
                                         <option selected disabled>Pilih Kategori</option>
                                         @foreach ($kategori as $k)
-                                            <option value=""></option>
                                             <option value="{{ $k->nama_kategori }}">{{ $k->nama_kategori }}</option>
                                         @endforeach
                                     </select>
@@ -132,11 +123,11 @@
                                 <tr>
                                     <th class="text-center">No.</th>
                                     <th>Kategori</th>
-                                    @if (Auth::user()->level == 1)
+                                    {{-- @if (Auth::user()->level == 1) --}}
                                         <th colspan="2" class="text-center">Aksi</th>
-                                    @else
+                                    {{-- @else
                                         <th class="text-center">Aksi</th>
-                                    @endif
+                                    @endif --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,17 +149,14 @@
                                                 </select>
                                             </td>
                                             <td class="table-action text-center" style="width: 3px">
-                                                {{-- <a href="/detail_jurnal"> --}}
-                                                    <button class="btn btn-sm btn-primary" style="border-radius: 5px"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19.78 2.2L24 6.42L8.44 22L0 13.55l4.22-4.22l4.22 4.22L19.78 2.2m0 2.8L8.44 16.36l-4.22-4.17l-1.41 1.36l5.63 5.62L21.19 6.42L19.78 5Z"/></svg></button>
-                                                {{-- </a> --}}
+                                                <button class="btn btn-sm btn-primary" style="border-radius: 5px"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M19.78 2.2L24 6.42L8.44 22L0 13.55l4.22-4.22l4.22 4.22L19.78 2.2m0 2.8L8.44 16.36l-4.22-4.17l-1.41 1.36l5.63 5.62L21.19 6.42L19.78 5Z"/></svg></button>
                                                 @if (Auth::user()->level == 1)
                                                 <a type="button" data-toggle="modal" data-target="">
-                                                    {{-- <a type="button" data-toggle="modal" data-target="#hapusK"> --}}
                                                         <button type="button" class="btn btn-sm btn-danger"
                                                         style="border-radius: 5px" data-bs-toggle="modal"
                                                         data-bs-target="#hapusK{{ $j_k->id_kategori }}"><i class="fas fa-trash"></i>  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path fill="currentColor" d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7ZM17 6H7v13h10V6ZM9 17h2V8H9v9Zm4 0h2V8h-2v9ZM7 6v13V6Z"/></svg></button>
-                                                    </a>
-                                                    @endif
+                                                </a>
+                                                @endif
                                             </td>
                                         </form>
 
@@ -218,7 +206,7 @@
                 {{-- <div class="card"> --}}
                   <div class="card">
                       <div class="card-header">
-                          <h5 class="card-title mb-2 mt-2">Data Kategori Jurnal</h5>
+                          <h5 class="card-title mb-2 mt-2">Data Publikasi Jurnal</h5>
                       </div>
                       {{-- @php
                           $image = DB::table('gambar')->where('produk_id', $p->id_produk)->get();

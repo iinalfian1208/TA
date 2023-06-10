@@ -73,7 +73,7 @@
         <div class="container mb-5">
             <div class="row" style="padding-left: 25px; padding-right: 25px;">
                 <!-- Side widgets-->
-                <div class="col-lg-4 mt-3 mb-3">
+                <div class="col-lg-4 mt-2 mb-3" >
                     <div class="sticky-top" style="top:90px;">
 
                         <!-- Categories widget-->
@@ -81,13 +81,17 @@
                             <form action="{{ route('search') }}" method="GET">
                                 <div class="card-header">
                                     <div class="row">
-                                        <div class="col-md-12">Filter
-                                            <button type="submit" class="btn btn-sm btn-primary float-end" style="border-radius: 40px">Terapkan</button>
-                                            {{-- <form action="/proses-data" method="post" onsubmit="reloadPage()">
-                                                <!-- Isi formulir -->
-                                                <button type="" class="btn btn-sm btn-primary float-end" style="border-radius: 40px"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15 12c0-1.7-1.3-3-3-3s-3 1.3-3 3s1.3 3 3 3s3-1.3 3-3zm2-8.7C13.1 1.1 8.3 1.8 5.1 4.7V3c0-.6-.4-1-1-1s-1 .4-1 1v4.5c0 .6.4 1 1 1h4.5c.6 0 1-.4 1-1s-.4-1-1-1H6.2C7.7 4.9 9.8 4 12 4c4.4 0 8 3.6 8 8c0 .6.4 1 1 1s1-.4 1-1c0-3.6-1.9-6.9-5-8.7zm2.9 12.2h-4.5c-.6 0-1 .4-1 1s.4 1 1 1h2.4C16.3 19.1 14.2 20 12 20c-4.4 0-8-3.6-8-8c0-.6-.4-1-1-1s-1 .4-1 1c0 5.5 4.5 10 10 10c2.6 0 5-1 6.9-2.8V21c0 .6.4 1 1 1s1-.4 1-1v-4.5c0-.6-.5-1-1-1z"/></svg></button>
-                                            </form> --}}
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    Filter
+                                                </div>
+                                                <div class="col-8 text-right">
+                                                    <button type="submit" class="btn btn-sm btn-primary" style="border-radius: 40px">Terapkan</button>
+                                                    <button type="button" class="btn btn-sm btn-danger" style="border-radius: 40px" onclick="redirectToIndex()">Refresh</button>
+                                                </div>
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -209,18 +213,19 @@
 
                     </div>
                 </div>
-                <div class="col-lg-8 mt-3" style="background-color: ">
+                {{-- <div class="col-lg-8 mt-2" style=" background-color:#7ea2c7;border-radius:5px"> --}}
+                <div class="col-lg-8 mt-2" style=" background-color:;border-radius:5px">
                     {{-- <div class=" position-fixed" style="top:100px"> --}}
                     <!-- Post content-->
                     <article>
                         <!-- Post header-->
                         <header class="mb-2">
                             <div class="row d-flex justify-content-between">
-                                <div class="col-md-5">
-                                    <span class="text-muted fst-italic">Total Data : {{ $data->total() }}</span></br>
-                                    <span class="text-muted fst-italic">{{ ceil($data->total()/10) }} Halaman</span>
+                                <div class="col-md-5 mt-2">
+                                    <span class="text-muted fst-italic text-black" style="text-black"><strong>Total Data : {{ $data->total() }}</strong></span></br>
+                                    <span class="text-muted fst-italic text-black">{{ ceil($data->total()/10) }} Halaman</span>
                                 </div>
-                                <div id="pagi" class="col-md-7 d-flex justify-content-end mt-1">
+                                <div id="pagi" class="col-md-7 d-flex justify-content-end mt-2">
                                     {{ $data->onEachSide(1)->links() }}
                                     {{-- {{ $data->appends(request()->query())->links('vendor.pagination.custom') }} --}}
                                 </div>
@@ -228,8 +233,9 @@
                         </header>
                     </article>
                     {{-- </div> --}}
-                    <section class="mb-5">
-                        <div class="card" style="border: none;" >
+                    <section class="mb-2">
+                        {{-- <div class="card border-danger " style="border: 10px;background-color:#7ea2c7;" > --}}
+                        <div class="card border-danger " style="border: 10px;background-color:;" >
                             {{-- <div class="card-body"> --}}
                                 <div class="row">
                                     @foreach ($data as $key=>$d)
@@ -238,9 +244,9 @@
                                             $j_jdw = DB::table('t_publikasi_jurnal')->where('id_jurnal', $d->id_jurnal)->get();
                                         @endphp
                                         <div class="col-md-6 mb-3">
-                                            <div class="card bg-light" style="background-color: #cbe0f5">
+                                            <div class="card bg-light border-secondary" style="background-color: #6e90b3">
                                                 <div class="card-body p-3 px-4">
-                                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 p-2"><span>Sinta {{ $d->peringkat }}</span></div>
+                                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-4 p-2" style="border-radius: 5px"><span>Sinta {{ $d->peringkat }}</span></div>
                                                     <a href="{{ $d->url }}" style="text-decoration: none;" target="_blank"><h6 class="fw-bold">{{ $d->nama_jurnal }}</h6></a>
                                                     {{-- <div class="small text-muted">- Client Name, Location</div> --}}
                                                     <h6 class="mb-0">{{ $d->nama_pt }}</h6><hr class="mb-0 mt-2 border border-1 border border-primary">
@@ -340,10 +346,12 @@
             </div>
         </div>
         <!-- Footer-->
-        <footer class="footer mt-auto  text-end" style="background-color: #081c5c">
-            <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
-                {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
+        <footer class="navbar navbar-expand-lg custom_nav-container " style="background-color: #081c5c">
+            <a class="navbar-brand text-right " href="" style="width: 100%">
+                <h6 class="text-right text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+            </a>
         </footer>
+
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
@@ -351,8 +359,8 @@
         {{-- <script src="{{ url('js/reload.js')}}"></script> --}}
 
         <script>
-            function reloadPage() {
-                location.reload();
+            function redirectToIndex() {
+                window.location.href = '{{ route("pencarian") }}';
             }
         </script>
         <script>
@@ -374,7 +382,7 @@
               }
             }
 
-            var x = window.matchMedia("(max-width: 500px)")
+            var x = window.matchMedia("(max-width: 1300px)")
             myFunction(x) // Call listener function at run time
             x.addListener(myFunction) // Attach listener function on state changes
         </script>

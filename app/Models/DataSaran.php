@@ -9,13 +9,13 @@ class DataSaran extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['idSaran '];
+    protected $guarded = [];
     protected $primaryKey = 'idSaran ';
     protected $table = 't_saran';
-    public function data()
-    {
-        return DB::table('t_saran');
-    }
+    // public function data()
+    // {
+    //     return DB::table('t_saran');
+    // }
 
     public function balas()
     {

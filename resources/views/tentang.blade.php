@@ -3,7 +3,7 @@
     <title>Jurnal Scraping</title>
 
     <link rel="shortcut icon" href="{{ asset('/images/sinta/21.png') }}" sizes="500x500"/>
-    <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}"> --}}
 </head>
 <body class="sub_page">
 
@@ -95,10 +95,10 @@
 
   <!-- end about section -->
 
-
-  <footer class="footer mt-auto  text-end" style="background-color: #1a237e">
-    <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
-        {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
+  <footer class="navbar navbar-expand-lg custom_nav-container " style="background-color: #081c5c">
+    <a class="navbar-brand text-right" href="" style="width: 100%">
+        <h6 class="text-right text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+    </a>
 </footer>
 
 </body>

@@ -53,44 +53,82 @@
 
                                 </button>
                             </a>
+                            <a type="button" data-toggle="modal" data-target="">
+                                <button type="button" class="btn btn-sm btn-danger"
+                                    style="border-radius: 5px" data-bs-toggle="modal"
+                                    data-bs-target="#hapus{{ $no }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg"  width="20" height="20" viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                        d="M7 21q-.825 0-1.413-.588T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.588 1.413T17 21H7ZM17 6H7v13h10V6ZM9 17h2V8H9v9Zm4 0h2V8h-2v9ZM7 6v13V6Z" />
+                                    </svg>
+                                </button>
+                            </a>
+                            {{-- modal balas --}}
                             <div class="modal fade" id="balas-{{ $d->idSaran }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Berikan Balasan</h5>
-                                    <button type="button" class="btn-close"
-                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                    <form action="{{ route('balasSaran') }}" method="get">
-                                        {{ csrf_field() }}
+                                        <h5 class="modal-title" id="exampleModalLabel">Berikan Balasan</h5>
+                                        <button type="button" class="btn-close"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <form action="{{ route('balasSaran') }}" method="get">
+                                            {{ csrf_field() }}
                                     </div>
                                     <div class="modal-body">
-                                        <input type="hidden" name="id_saran" id="id_saran" value="{{ $d->idSaran }}">
-                                    <div class="mb-3">
-                                        <label class="form-label" for="inputUsername">Nama </label>
-                                        <input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" placeholder="" value="{{ $d->nama_penulis}}" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="inputUsername">Review</label>
-                                        <input type="text" class="form-control" id="nama_pt" name="review" placeholder="" value="{{ $d->review}}" readonly>
+                                            <input type="hidden" name="id_saran" id="id_saran" value="{{ $d->idSaran }}">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="inputUsername">Nama </label>
+                                            <input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" placeholder="" value="{{ $d->nama_penulis}}" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="inputUsername">Review</label>
+                                            <input type="text" class="form-control" id="nama_pt" name="review" placeholder="" value="{{ $d->review}}" readonly>
 
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="inputUsername">Saran</label>
-                                        <input type="text" class="form-control" id="nama_pt" name="review" placeholder="" value="{{ $d->isi}}" readonly>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="inputUsername">Saran</label>
+                                            <input type="text" class="form-control" id="nama_pt" name="review" placeholder="" value="{{ $d->isi}}" readonly>
 
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="inputUsername">Balasan</label><br>
-                                        <textarea name="balas" type='text' id="balas" cols="62" rows="5"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                    <button type="submit" class="btn btn-primary">Kirim</button>
-                                    </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="inputUsername">Balasan</label><br>
+                                            <textarea name="balas" type='text' id="balas" cols="62" rows="5"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                        </div>
                                 </div>
                             </form>
                                 </div>
                             </div>
+                            </div>
+                            <div class="modal fade" id="hapus{{ $no }}" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Hapus Data Saran</h1>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p class="mb-0">Yakin ingin menghapus saran dari pengunjung website?
+                                                                <strong></strong>?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Batal</button>
+                                                                <form action="{{ Route('hapus_saran', $d->idSaran) }}" method="post">
+                                                                    {{ csrf_field() }}
+                                                                    @method('delete')
+                                                                    <button type="submit" class="btn btn-primary">Hapus</button>
+                                                                </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                         </td>
                         </tr>

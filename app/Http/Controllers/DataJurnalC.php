@@ -202,15 +202,15 @@ class DataJurnalC extends Controller
         ];
 
         $this->model->data()->where('id_jurnal', $kode)->update($data);
-        Session::flash('sukses', 'Berhasil memperbarui data');
-        return redirect('/detail_jurnal/'.$kode);
+        // Session::flash('sukses', 'Berhasil memperbarui data');
+        return redirect('/detail_jurnal/'.$kode)->with('success', 'Berhasil memperbarui data');
     }
 
     public function delete($kode)
     {
         $this->model->data()->where('id_jurnal', $kode)->delete();
-        Session::flash('sukses', 'Berhasil menghapus data');
-        return redirect('/daftar_jurnal');
+        // Session::flash('sukses', 'Berhasil menghapus data');
+        return redirect('/daftar_jurnal')->with('success', 'Berhasil menghapus data jurnal');
     }
 
     public function indexDetail($kode)

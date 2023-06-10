@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{{ asset('/vendors/typicons/typicons.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendors/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('/vendors/css/vendor.bundle.base.css') }}">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
     {{-- <link rel="stylesheet" href="{{ asset('/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
@@ -43,6 +43,7 @@
 </head>
 
 <body>
+    
     <div class="container-scroller">
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -469,6 +470,12 @@
     <script src="{{ url('/js/template.js') }}"></script>
     <script src="{{ url('/js/settings.js') }}"></script>
     <script src="{{ url('/js/todolist.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        #loading-spinner {
+          display: none; /* Sembunyikan spinner saat tidak ada loading */
+        }
+      </style>
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src=" {{ url('/js/jquery.cookie.js') }}" type="text/javascript"></script>

@@ -1,8 +1,8 @@
 @extends('template')
-<head>
+{{-- <head>
 
     <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}">
-</head>
+</head> --}}
 @section('home')
 <body>
     <header class="header_section">
@@ -360,19 +360,12 @@
 
 
   <!-- end client section -->
-  {{-- <div class="spinner-border text-primary" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div class="spinner-border text-secondary" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-  <div class="spinner-border text-success" role="status">
-    <span class="sr-only">Loading...</span>
-  </div> --}}
-  <footer class="footer mt-auto  text-end" style="background-color: #081c5c">
-    <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
-        {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
+  <footer class="navbar navbar-expand-lg custom_nav-container " style="background-color: #081c5c">
+    <a class="navbar-brand text-end" href="" style="width: 100%">
+        <h6 class="text-right text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+    </a>
 </footer>
+
 
 </body>
 

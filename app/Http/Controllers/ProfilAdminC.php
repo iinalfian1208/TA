@@ -43,7 +43,7 @@ class ProfilAdminC extends Controller
 
         try {
             $this->model->data()->where('email', auth()->user()->email)->update($data);
-            return redirect()->route('profil')->with('success', 'Berhasil memperbarui data.');
+            return redirect()->route('profil')->with('success', 'Berhasil memperbarui data profil');
         } catch (\Illuminate\Database\QueryException $ex) {
             $errorCode = $ex->errorInfo[1];
             if($errorCode == 1062){

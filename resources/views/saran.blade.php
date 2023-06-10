@@ -12,11 +12,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{ asset('coba3/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('backup/admin/css/light.css') }}">
 
 </head>
-{{-- @section('tentang') --}}
-
 <body class="sub_page">
 
     <div class="hero_area">
@@ -47,15 +44,10 @@
                                 <li class="nav-item {{ request()->is('tentang') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('tentang') }}"> Tentang</a>
                                 </li>
-                                {{-- <li class="nav-item">
-                    <a class="nav-link" href="service.html"> Saran </a>
-                  </li> --}}
                                 <li class="nav-item {{ request()->is('saran') ? 'active' : '' }}">
-                                    {{-- <a class="nav-link" href="#contactLink">Saran</a> --}}
                                     <a class="nav-link" href="{{ route('tampil') }}">Saran</a>
                                 </li>
                                 <li class="nav-item {{ request()->is('infojurnal') ? 'active' : '' }}">
-                                    {{-- <a class="nav-link" href="#contactLink">Saran</a> --}}
                                     <a class="nav-link" href="{{ route('pencarian') }}">Info Jurnal</a>
                                 </li>
                             </ul>
@@ -81,7 +73,6 @@
                         Saran</a>
                 </div>
             </div>
-
             <div class="row mt-4">
                 @foreach($data as $d)
                 <div class="col-md-6">
@@ -100,6 +91,9 @@
                                             <div class="text-left">
                                                 <h6 class="user">   {{ $d->nama_penulis}}</h6>
                                             </div>
+                                            <div class="text-left">
+                                                <h6 class="user">   {{ $d->created_at}}</h6>
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="text-right" style="padding-right: 65px">
@@ -107,7 +101,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="row mt-1 ">
                                         <div class="media mt-1 comment" style="background-color: #7d746c">
                                         <h5 class="user mt-3 mb-3">{{ $d->isi}}
@@ -131,99 +124,67 @@
                                     @endif
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
                 @endforeach
             </div>
-
         </div>
     </section>
-    <footer class="footer mt-auto  text-end" style="background-color: #081c5c">
-        <h6 class="ml-4 ml-sm-5 mb-2 mr-5 text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
-            {{-- <small class="ml-4 ml-sm-5 mb-2 mr-5 text-white mt-5 text-center">Website Jurnal Scraping 2023</small> --}}
-    </footer>
-</section>
-<div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
- <div class="modal-dialog modal-dialog-centered">
-   <div class="modal-content">
-     <div class="modal-header">
-       <h5 class="modal-title" id="exampleModalLabel">Berikan Saran</h5>
-     </div>
-     <form action="{{ route('saran1') }}" method="get">
-         {{ csrf_field() }}
-     <div class="modal-body">
-
-     <div class="mb-2">
-         <label class="form-label" for="inputUsername">Nama</label>
-         <input type="text" class="form-control" id="nama_penulis" name="nama_penulis" placeholder="" value="" required>
-       </div>
-       <div class="mb-3">
-         <label class="form-label" for="inputUsername">Review</label>
-         {{-- <input type="text" class="form-control" id="nama_pt" name="review" placeholder="" value="" required> --}}
-         <select class="form-control" id="review" name="review" required>
-             <option value="Sangat Membantu">Sangat Membantu</option>
-             <option value="Membantu">Membantu</option>
-             <option value="Cukup Membantu">Cukup Membantu</option>
-             <option value="Tidak Membantu">Tidak Membantu</option>
-         </select>
-       </div>
-
-       <div class="mb-2">
-         <label class="form-label" for="inputUsername">Saran</label><br>
-         <textarea name="isi" id="isi" cols="57" rows="1" class="form-control"></textarea>
-       </div>
-       <div class="mb-2">
-         <label for="captcha" class="form-label">Captcha</label>
-         <div class="col-md-6 captcha">
-             <span>{!! captcha_img('math') !!}</span>
-             <button type="button" class="btn btn-danger reload" class="reload" id="reload">
-             &#x21bb;
-             </button>
-         </div>
-     </div>
-     <div class="mb-2">
-         <label for="captcha" class="form-label">Enter Captcha</label>
-             <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha" required >
-
-     </div>
-
-     <div class="modal-footer">
-       {{-- <input type="hidden" name="xcd" value="{{ Session::get('codeCaptcha') }}" hidden required> --}}
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-       <button type="submit" class="btn btn-primary" id="liveToastBtn">Kirim</button>
-       {{-- <button type="submit" class="btn btn-primary">Kirim</button> --}}
-     </div>
-     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-         <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-           <div class="toast-header">
-             <img src="..." class="rounded me-2" alt="...">
-             <strong class="me-auto">Bootstrap</strong>
-             <small>11 mins ago</small>
-             <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-           </div>
-           <div class="toast-body">
-             Hello, world! This is a toast message.
-           </div>
-         </div>
-       </div>
-   </div>
-     </form>
- </div>
-</div>
-
-
-<!-- end about section -->
-
-
-<div class="footer_bg">
-
- <!-- contact section -->
-
-
-
-</div>
+    {{-- Modal Ber saran --}}
+    <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Berikan Saran</h5>
+        </div>
+        <form action="{{ route('saran1') }}" method="get">
+            {{ csrf_field() }}
+        <div class="modal-body">
+            <div class="mb-2">
+                <label class="form-label" for="inputUsername">Nama</label>
+                <input type="text" class="form-control" id="nama_penulis" name="nama_penulis" placeholder="" value="" required>
+            </div>
+        <div class="mb-3">
+            <label class="form-label" for="inputUsername">Review</label>
+            <select class="form-control" id="review" name="review" required>
+                <option value="Sangat Membantu">Sangat Membantu</option>
+                <option value="Membantu">Membantu</option>
+                <option value="Cukup Membantu">Cukup Membantu</option>
+                <option value="Tidak Membantu">Tidak Membantu</option>
+            </select>
+        </div>
+        <div class="mb-2">
+            <label class="form-label" for="inputUsername">Saran</label><br>
+            <textarea name="isi" id="isi" cols="57" rows="1" class="form-control"></textarea>
+        </div>
+        <div class="mb-2">
+            <label for="captcha" class="form-label">Captcha</label>
+            <div class="col-md-6 captcha">
+                <span>{!! captcha_img('math') !!}</span>
+                <button type="button" class="btn btn-danger reload" class="reload" id="reload">
+                &#x21bb;
+                </button>
+            </div>
+        </div>
+        <div class="mb-2">
+            <label for="captcha" class="form-label">Enter Captcha</label>
+                <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha" required >
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary" id="liveToastBtn">Kirim</button>
+        </div>
+    </div>
+        </form>
+    </div>
+    </div>
+    </div>
+        <footer class="navbar navbar-expand-lg custom_nav-container " style="background-color: #081c5c">
+            <a class="navbar-brand text-right" href="" style="width: 100%">
+                <h6 class="text-right text-white"><strong>Website Jurnal Scraping 2023</strong></h6>
+            </a>
+        </footer>
 @push('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -241,4 +202,5 @@
 @endpush
 @include('sweetalert::alert')
 @stack('scripts')
+
 </body>

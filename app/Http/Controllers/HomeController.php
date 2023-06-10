@@ -28,6 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         return view('home');
     }
 
@@ -59,8 +60,9 @@ class HomeController extends Controller
             $label[] = $cek_label[$i]->kata_kunci;
             $total[] = $cek_label[$i]->total;
         }
+        $total_pt =DB::table('t_pt')->select('*')->count();
 
         // return $label;
-        return view('admin.beranda', ['total_j' => $jurnal, 'kategori_null' => $kategori, 'jadwal_null' => $jadwal, 'pencarian' => $pencarian, 'labels' => $label, 'total' => $total]);
+        return view('admin.beranda', ['total_j' => $jurnal, 'kategori_null' => $kategori, 'jadwal_null' => $jadwal, 'pencarian' => $pencarian, 'labels' => $label, 'total' => $total, 'total_pt' =>$total_pt] );
     }
 }

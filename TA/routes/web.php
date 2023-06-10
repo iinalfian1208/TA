@@ -71,7 +71,7 @@ Route::middleware(['role: 1'])->group(function (){
     Route::post('/detail_jurnal/tambah/kat/{kode}', 'DataJurnalC@createJK');
     Route::post('/detail_jurnal/edit/kat/{kode}', 'DataJurnalC@updateJK');
     Route::delete('/detail_jurnal/hapus/kat/{kode}', 'DataJurnalC@deleteJK');
-    
+
     Route::post('/detail_jurnal/tambah/jp/{kode}', 'DataJurnalC@createJP');
     Route::post('/detail_jurnal/edit/jp/{kode}', 'DataJurnalC@updateJP');
     Route::delete('/detail_jurnal/hapus/jp/{kode}', 'DataJurnalC@deleteJP');

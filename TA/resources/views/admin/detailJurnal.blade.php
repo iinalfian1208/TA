@@ -188,7 +188,7 @@
     														<option value="12">Desember</option>
     													</select>
     												</td>
-                                                    
+
     												<td class="table-action text-center" style="width: 3px">
     													<a href="/detail_jurnal">
     														<button class="btn btn-sm btn-primary" style="border-radius: 5px"><i class="fas fa-check"></i></button>
